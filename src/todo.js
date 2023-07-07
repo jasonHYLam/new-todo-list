@@ -1,25 +1,26 @@
-const makeTodo = (title, description, dueDate, priority) => {
-    let title = title;
-    let description = description;
-    let dueDate = dueDate;
-    let priority = priority;
+class Todo {
+    constructor(title, description, dueDate, priority) {
+    this.title = title;
+    this.description = description;
+    this.dueDate = dueDate;
+    this.priority = priority;
+    }
 
-    const getProp = (prop) => prop;
-    const setProp = (prop, newValue) => prop = newValue;
-
-    return {getProp, setProp};
+    setProp(prop, value) {
+        this[prop] = value;
+    } 
 }
 
 const todoTest = () => {
-    let test = makeTodo(
+    let test = new Todo(
         'let',
         'let us',
         'now',
         'urgent',
          )
     console.log(
-
-    test.getProp(title)
+        test
+    // test.getProp(test.titleProp)
     )
     
 }
