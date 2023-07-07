@@ -17,10 +17,12 @@ const todoTest = () => {
         'let us',
         'now',
         'urgent',
-         )
+         );
+        
+    test.setProp('description', "bad boy");
+
     console.log(
-        test
-    // test.getProp(test.titleProp)
+        test.description
     )
     
 }
