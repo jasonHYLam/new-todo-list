@@ -68,9 +68,11 @@ export function project() {
     pubSub.subscribe('projectFormSubmitted', (name) => {
         const newProject = new Project(name); 
         console.log(projectArray);
-        // still not resolved, resolve this!!
-    })
 
+        // when a new project is created
+        // is it wise to put a publish inside a subscribe? i mean, i don't see why not
+        pubSub.publish('projectAdded', projectArray);
+    })
 
 
 
