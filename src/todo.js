@@ -33,10 +33,10 @@ function todo() {
     }
 
     // pubsub SUBSCRIBE
-    pubSub.subscribe('todoFormSubmitted', (args) => {
+    pubSub.subscribe('todoFormSubmitted', (...args) => {
         const newTodo = new Todo(args[0], args[1], args[2], args[3])
 
-        pubSub.publish('newTodoCreated', newTodo)
+        // pubSub.publish('newTodoCreated', newTodo)
     })
 
 
