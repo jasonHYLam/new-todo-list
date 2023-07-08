@@ -1,40 +1,42 @@
-let todoArray = [];
+import { pubSub } from "./pubsub";
 
-const pushToArray = (todo) => {
-    todoArray.push(todo);
-}
+//may have to encapsulate all of this into a function
 
-const displayArray = () => {
-    console.log(todoArray);
-}
+function todo() {
 
+    let todoArray = [];
 
-class Todo {
-    constructor(title, description, dueDate, priority) {
-    this.title = title;
-    this.description = description;
-    this.dueDate = dueDate;
-    this.priority = priority;
+    const pushToArray = (todo) => {
+        todoArray.push(todo);
     }
 
-    setProp(prop, value) {
-        this[prop] = value;
-    } 
-}
+    const displayArray = () => {
+        console.log(todoArray);
+    }
 
-const todoTest = () => {
+
+    class Todo {
+        constructor(title, description, dueDate, priority) {
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.priority = priority;
+        pushToArray(this);
+        }
+
+        setProp(prop, value) {
+            this[prop] = value;
+        } 
+    }
+
     let test = new Todo(
         'let',
         'let us',
         'now',
         'urgent',
-         );
+        );
         
-    test.setProp('description', "bad boy");
-
-    console.log(
-        test.description
-    )
+    displayArray();
 }
 
-export {todoTest, displayArray};
+export {todo};
