@@ -16,6 +16,8 @@ export function display() {
         projectArray.forEach(createOption)
     }
 
+    createAllOptions();
+
     // when creating new project, display all projects
     pubSub.subscribe('projectAdded', createAllOptions);
 }
