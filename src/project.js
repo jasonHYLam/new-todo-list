@@ -22,6 +22,9 @@ export function project() {
         return getArray()[index];
     }
 
+    //delete project;  
+    // create project
+
     class Project {
         constructor(name) {
             this.todoArray = [];
@@ -29,13 +32,24 @@ export function project() {
             pushToArray(this);
         }
 
+        // USED
         addToDo(todo) {
             this.todoArray.push(todo)
         }
-        // add todo to project; get todo array, select todo from array. based on index? data attribute?
-        // delete todo from project; based on index/data attr?; should not delete todo in all todos, just the one in todoArray
-        // change todo; based on index/data attr?
-        // change name?
+        // NOT USED
+        removeToDo(todo) {
+            this.todoArray.filter(el => el != todo);
+        }
+
+        // NOT USED AND DEVELOP
+        changeToDo(todo) {
+
+        }
+
+        // NOT USED AND DEVELOP
+        changeName(name) {
+            this.name = name;
+        }
     }
 
 
@@ -45,16 +59,12 @@ export function project() {
     // subscribe to when todo is added
     pubSub.subscribe('todoAdded',(todo) => {
         const index = promptProjectToAdd();
-        console.log(index);
-
-        console.log(projectArray[index].todoArray);
         selectProjectWithIndex(index).addToDo(todo);//not sure if this works
-        console.log(projectArray[index].todoArray);
     });
 
+    // CREATE MORE SUBSCRIBES
 
 
-    //delete project;  
-    // create project
+
 
 }
