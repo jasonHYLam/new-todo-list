@@ -64,7 +64,14 @@ export function project() {
 
     // CREATE MORE SUBSCRIBES
 
+    // subscribe to when projectform is submitted
+    pubSub.subscribe('projectFormSubmitted', (name) => {
+        const newProject = new Project(name); 
+        // still not resolved, resolve this!!
+    })
 
 
 
 }
+
+
