@@ -1,5 +1,7 @@
 import { todoTest, displayArray } from "./todo";
-console.log('hey');
+import { project } from "./project";
 
-todoTest();
-displayArray();
+// todoTest();
+// displayArray();
+
+project();
