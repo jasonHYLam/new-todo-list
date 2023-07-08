@@ -22,6 +22,7 @@ function todo() {
         this.dueDate = dueDate;
         this.priority = priority;
         pushToArray(this);
+        pubSub.publish('todoAdded')
         }
 
         setProp(prop, value) {
