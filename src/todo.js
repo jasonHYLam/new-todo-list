@@ -1,3 +1,14 @@
+let todoArray = [];
+
+const pushToArray = (todo) => {
+    todoArray.push(todo);
+}
+
+const displayArray = () => {
+    console.log(todoArray);
+}
+
+
 class Todo {
     constructor(title, description, dueDate, priority) {
     this.title = title;
@@ -24,7 +35,6 @@ const todoTest = () => {
     console.log(
         test.description
     )
-    
 }
 
-export {todoTest};
+export {todoTest, displayArray};

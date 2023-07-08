@@ -1,4 +1,5 @@
-import { todoTest } from "./todo";
+import { todoTest, displayArray } from "./todo";
 console.log('hey');
 
 todoTest();
+displayArray();
