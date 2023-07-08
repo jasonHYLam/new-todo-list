@@ -8,10 +8,10 @@ export function formHandler() {
     const getTodoArgs = () => {
     const todoTitle = document.querySelector("#todoTitle").value;
     const todoDescription = document.querySelector("#todoDescription").value;
-    const todoDueDate = document.querySelector("#todoSubmit").value;
-    const todoPriority = document.querySelector("#todoSubmit").value;
+    const todoDueDate = document.querySelector("#dueDate").value;
+    const todoPriority = document.querySelector("#todoPriority").value;
     const todoArgs = [todoTitle, todoDescription, todoDueDate, todoPriority]
-    return todoArgs
+    return todoArgs;
     }
     submitTodo.addEventListener("click", (e) => {
         e.preventDefault();
