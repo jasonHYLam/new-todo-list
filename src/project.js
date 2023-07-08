@@ -58,8 +58,8 @@ export function project() {
 
     // subscribe to when todo is added
     pubSub.subscribe('todoAdded',(todo) => {
-        const index = promptProjectToAdd();
-        selectProjectWithIndex(index).addToDo(todo);//not sure if this works
+        // const index = promptProjectToAdd();
+        // selectProjectWithIndex(index).addToDo(todo);//not sure if this works
     });
 
     // CREATE MORE SUBSCRIBES
@@ -67,8 +67,10 @@ export function project() {
     // subscribe to when projectform is submitted
     pubSub.subscribe('projectFormSubmitted', (name) => {
         const newProject = new Project(name); 
+        console.log(projectArray);
         // still not resolved, resolve this!!
     })
+
 
 
 

@@ -8,7 +8,9 @@ export function formHandler() {
 
     const submitProject = document.querySelector('#projectSubmit')
     submitProject.addEventListener("click", () => {
-        // pubSub('createProject', console.log(document.querySelector('#projectForm input').value))
+        // pubSub for creating project
+        pubSub.publish('projectFormSubmitted', document.querySelector('#projectForm input').value)
         console.log(document.querySelector('#projectForm input').value)
+        // pubSub for displayProject
     })
 }
