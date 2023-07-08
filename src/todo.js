@@ -34,7 +34,9 @@ function todo() {
 
     // pubsub SUBSCRIBE
     pubSub.subscribe('todoFormSubmitted', (...args) => {
-        const newTodo = new Todo(args[0], args[1], args[2], args[3])
+        console.log(args);
+        console.log(args[0]);
+        // const newTodo = new Todo(args[0], args[1], args[2], args[3])
 
         // pubSub.publish('newTodoCreated', newTodo)
     })
