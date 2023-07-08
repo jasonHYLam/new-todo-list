@@ -21,8 +21,10 @@ function todo() {
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
+        // when todo is created, push to todoarray
         pushToArray(this);
-        pubSub.publish('todoAdded')
+        // when todo is created, publish the event, which triggers callback to add to project
+        pubSub.publish('todoAdded', this)//not sure if this haha works 
         }
 
         setProp(prop, value) {
@@ -37,7 +39,7 @@ function todo() {
         'urgent',
         );
         
-    displayArray();
+    // displayArray();
 }
 
 export {todo};
