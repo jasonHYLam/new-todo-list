@@ -4,11 +4,12 @@ export function project() {
 
     // subscribe to when todo is added
     pubSub.subscribe('getProject',(projectMatch) => {//dunno what to call projectMatch; the thing that i pass to find the correct project
-        const test = projectArray.filter((project) => project.name == projectMatch)
-        console.log('test this ')
-        console.log(test);
+        const selectedProject = projectArray.filter((project) => project.name == projectMatch)//also, may need to use data attribute, rather than name. or use form vaolidation to not use same name
 
-        // pubSub to display the todos
+
+        // pubSub to display the todos; send to display.js
+        pubSub.publish("displaySelectedProjectElements", selectedProject);
+
     });
 
     // subscribe to when projectform is submitted
@@ -19,11 +20,15 @@ export function project() {
         pubSub.publish('projectAdded', projectArray);
     })
 
+    // need to get a project first
+    // add to a project's todoArray
+    pubSub.subscribe()
+
 
 
     let projectArray = [];
 
-    const pushToArray = (project) => {
+    const increaseProjects = (project) => {
         projectArray.push(project)
     }
 
@@ -48,7 +53,7 @@ export function project() {
         constructor(name) {
             this.todoArray = [];
             this.name = name;
-            pushToArray(this);
+            increaseProjects(this);
         }
 
         // USED

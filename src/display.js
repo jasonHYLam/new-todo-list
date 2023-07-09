@@ -12,6 +12,17 @@ export function display() {
     // when creating new project, display all projects
     pubSub.subscribe('projectAdded', displayAllProjectOptions);
 
+    pubSub.subscribe('displaySelectedProjectElements', (project) => {
+        console.log('project')
+        console.log(project)
+        console.log('project array')
+        console.log(project.todoArray)
+        changeHeader(project.name);
+        displayProjectTodos(project.todoArray);
+    })
+
+
+
     const todoContainer = document.querySelector("#todoContainer");
 
     const createDOMProp = (elType, value) => {
@@ -78,10 +89,16 @@ export function display() {
 
     // get name of project from select
     projectSelect.addEventListener("change", ()=> {
-        // send this code somewhere; use it to match with project
+        // send this code to project.js
         // IM NOT SURE THIS WORKS, getProject IS USED BY FORMHANDLER AS WELL
         pubSub.publish("getProject", getSelectedProject())
     })
     
+
+    const header = document.querySelector("#header");
+    const changeHeader = (projectName) => {
+        header.textContent = "";
+        header.textContent = projectName;
+    }
 
 }
