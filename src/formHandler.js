@@ -1,6 +1,11 @@
 import { pubSub } from "./pubsub";
 
 export function formHandler() {
+
+    const resetForm = (form) => {
+        form.reset()
+    }
+
     const todoForm = document.querySelector("#todoForm")
     console.log(todoForm)
     const submitTodo = document.querySelector("#todoSubmit");
@@ -13,11 +18,12 @@ export function formHandler() {
     const todoArgs = [todoTitle, todoDescription, todoDueDate, todoPriority]
     return todoArgs;
     }
+
     submitTodo.addEventListener("click", (e) => {
         e.preventDefault();
         // pubsub for creating a new todo
         pubSub.publish('todoFormSubmitted', getTodoArgs());
-
+        resetForm(todoForm);
     })
 
 
@@ -33,5 +39,6 @@ export function formHandler() {
         // pubSub for creating a new project
         pubSub.publish('projectFormSubmitted', document.querySelector('#projectForm input').value)
         console.log(document.querySelector('#projectForm input').value)
+        resetForm(projectForm);
     })
 }
