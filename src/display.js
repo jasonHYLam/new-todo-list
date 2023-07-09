@@ -2,6 +2,12 @@ import { pubSub } from "./pubsub";
 
 export function display() {
 
+    // when new todo is created, display all todos
+    pubSub.subscribe('newTodoCreated', displayProjectTodos)
+
+    // when creating new project, display all projects
+    pubSub.subscribe('projectAdded', displayAllProjectOptions);
+
     const todoContainer = document.querySelector("#todoContainer");
 
     const createGenericTodoDOM = (elType, value) => {
@@ -19,15 +25,9 @@ export function display() {
         createGenericTodoDOM('span', todo.priority)
     }
 
-
-
-    const displayProjectTodos = (todoArray) => {
+    function displayProjectTodos(todoArray) {
         todoArray.forEach((todo) => createTodoDOM(todo));
     }
-
-    // when new todo is created, display todo
-    pubSub.subscribe('newTodoCreated', displayProjectTodos)
-    
 
 
     const projectSelect = document.querySelector("#projectSelect");
@@ -39,12 +39,9 @@ export function display() {
         projectSelect.appendChild(option);
 
     }
-    const createAllOptions = (projectArray) => {
-        projectArray.textContent = '';
+    function displayAllProjectOptions(projectArray) {
         projectArray.forEach(createProjectOption)
     }
 
 
-    // when creating new project, display all projects
-    pubSub.subscribe('projectAdded', createAllOptions);
 }
