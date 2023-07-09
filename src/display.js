@@ -10,7 +10,7 @@ export function display() {
 
     const todoContainer = document.querySelector("#todoContainer");
 
-    const createGenericTodoDOM = (elType, value) => {
+    const createDOMProp = (elType, value) => {
         const todoDOM = document.createElement('div');
         const todoProp = document.createElement(elType);
         todoProp.textContent = value;
@@ -19,10 +19,12 @@ export function display() {
     }
 
     const createTodoDOM = (todo) => {
-        createGenericTodoDOM('span', todo.title)
-        createGenericTodoDOM('span', todo.description)
-        createGenericTodoDOM('span', todo.dueDate)
-        createGenericTodoDOM('span', todo.priority)
+        createDOMProp('span', todo.title);
+        createDOMProp('span', todo.description);
+        createDOMProp('span', todo.dueDate);
+        createDOMProp('span', todo.priority);
+        createDOMProp('button', 'Change');
+        createDOMProp('button', 'Delete');
     }
 
     function displayProjectTodos(todoArray) {
@@ -37,11 +39,9 @@ export function display() {
         option.textContent= project.name;
         console.log(`project name: ${project.name}`)
         projectSelect.appendChild(option);
-
     }
+
     function displayAllProjectOptions(projectArray) {
         projectArray.forEach(createProjectOption)
     }
-
-
 }
