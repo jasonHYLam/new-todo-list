@@ -37,14 +37,32 @@ export function display() {
 
     const projectSelect = document.querySelector("#projectSelect");
     
-    const createProjectOption = (project) => {
+
+    // can only assign one instance of a Node, so need to create multiple instances
+    const createOptionElement = (project) => {
         const option = document.createElement('option');
-        option.textContent= project.name;
-        projectSelect.appendChild(option);
+        option.textContent = project.name;
+        return option;
     }
 
+    const resetOptionElements = () => {
+        const projectSelectInTodoForm = document.querySelector("#projectForTodo");
+        projectSelectInTodoForm.textContent = "";
+        projectSelect.textContent = "";
+
+    }
+
+    const assignProjectOption = (project) => {
+        // may need to separate project select and todo form project select...
+        const projectSelectInTodoForm = document.querySelector("#projectForTodo");
+        projectSelectInTodoForm.appendChild(createOptionElement(project));
+        projectSelect.appendChild(createOptionElement(project));
+    }
+
+
     function displayAllProjectOptions(projectArray) {
-        projectArray.forEach(createProjectOption)
+        resetOptionElements();
+        projectArray.forEach((project) => assignProjectOption(project))
     }
 
 }
