@@ -4,7 +4,7 @@ export function display() {
 
     const todoContainer = document.querySelector("#todoContainer");
 
-    const createTodoDOM = (elType, value) => {
+    const createGenericTodoDOM = (elType, value) => {
         const todoDOM = document.createElement('div');
         const todoProp = document.createElement(elType);
         todoProp.textContent = value;
@@ -12,13 +12,21 @@ export function display() {
         todoContainer.appendChild(todoDOM);
     }
 
+    const createTodoDOM = (todo) => {
+        createGenericTodoDOM('span', todo.title)
+        createGenericTodoDOM('span', todo.description)
+        createGenericTodoDOM('span', todo.dueDate)
+        createGenericTodoDOM('span', todo.priority)
+    }
+
+
+
+    const displayProjectTodos = (todoArray) => {
+        todoArray.forEach((todo) => createTodoDOM(todo));
+    }
+
     // when new todo is created, display todo
-    pubSub.subscribe('newTodoCreated', (todo) => {
-        createTodoDOM('span', todo.title)
-        createTodoDOM('span', todo.description)
-        createTodoDOM('span', todo.dueDate)
-        createTodoDOM('span', todo.priority)
-    })
+    pubSub.subscribe('newTodoCreated', displayProjectTodos)
     
 
 

@@ -15,7 +15,6 @@ export function formHandler() {
     }
     submitTodo.addEventListener("click", (e) => {
         e.preventDefault();
-        console.log(`title is ${todoTitle}`)
         // pubsub for creating a new todo
         pubSub.publish('todoFormSubmitted', getTodoArgs());
 
