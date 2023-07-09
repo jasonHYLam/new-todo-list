@@ -31,8 +31,6 @@ function todo() {
         this.priority = priority;
         // when todo is created, push to todoarray
         pushToArray(this);
-        // when todo is created, publish the event, which triggers callback to add to project
-        pubSub.publish('todoAdded', this)//not sure if this haha works 
         }
 
         setProp(prop, value) {

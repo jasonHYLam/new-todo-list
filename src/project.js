@@ -3,9 +3,12 @@ import { pubSub } from "./pubsub";
 export function project() {
 
     // subscribe to when todo is added
-    pubSub.subscribe('todoAdded',(todo) => {
-        // const index = promptProjectToAdd();
-        // selectProjectWithIndex(index).addToDo(todo);//not sure if this works
+    pubSub.subscribe('getProject',(projectMatch) => {//dunno what to call projectMatch; the thing that i pass to find the correct project
+        const test = projectArray.filter((project) => project.name == projectMatch)
+        console.log('test this ')
+        console.log(test);
+
+        // pubSub to display the todos
     });
 
     // subscribe to when projectform is submitted
@@ -15,6 +18,8 @@ export function project() {
         // when a new project is created
         pubSub.publish('projectAdded', projectArray);
     })
+
+
 
     let projectArray = [];
 

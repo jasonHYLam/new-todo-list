@@ -7,7 +7,6 @@ export function formHandler() {
     }
 
     const todoForm = document.querySelector("#todoForm")
-    console.log(todoForm)
     const submitTodo = document.querySelector("#todoSubmit");
 
     const getTodoArgs = () => {
@@ -19,15 +18,22 @@ export function formHandler() {
     return todoArgs;
     }
 
+    const getProjectToSendTo = () => {
+        const project = document.querySelector("#projectForTodo");
+        return project.value;
+        // may need to refactor to use data attribute and index... phooey
+    }
+
     submitTodo.addEventListener("click", (e) => {
         e.preventDefault();
+        getProjectToSendTo();
         // pubsub for creating a new todo
-        pubSub.publish('todoFormSubmitted', getTodoArgs());
+        pubSub.publish('todoFormSubmitted', getTodoArgs()); 
+        pubSub.publish('getProject', getProjectToSendTo())//may need to remove the ()
         resetForm(todoForm);
     })
 
     const projectForm = document.querySelector("#projectForm")
-    console.log(projectForm)
 
     const submitProject = document.querySelector('#projectSubmit')
     submitProject.addEventListener("click", (e) => {
