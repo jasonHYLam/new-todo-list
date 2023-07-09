@@ -1,6 +1,24 @@
 import { pubSub } from "./pubsub";
 
 export function display() {
+
+    const todoContainer = document.querySelector("#todoContainer");
+
+    const createTodoDOM = (elType, value) => {
+        const todoDOM = document.createElement('div');
+        const todoProp = document.createElement(elType);
+        todoProp.textContent = value;
+        todoDOM.appendChild(todoProp);
+        todoContainer.appendChild(todoDOM);
+    }
+
+    // when new todo is created, display todo
+    pubSub.subscribe('newTodoCreated', (todo) => {
+        createTodoDOM('span', todo.title)
+        createTodoDOM('span', todo.description)
+        createTodoDOM('span', todo.dueDate)
+        createTodoDOM('span', todo.priority)
+    })
     
 
 

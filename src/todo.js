@@ -33,14 +33,12 @@ function todo() {
     }
 
     // pubsub SUBSCRIBE
-    pubSub.subscribe('todoFormSubmitted', (...args) => {
-        console.log(args);
-        console.log(args[0]);
-        console.log(args[2]);
-        console.log(args[3]);
-        // const newTodo = new Todo(args[0], args[1], args[2], args[3])
+    pubSub.subscribe('todoFormSubmitted', (args) => {
+        const newTodo = new Todo(args[0], args[1], args[2], args[3])
 
-        // pubSub.publish('newTodoCreated', newTodo)
+        pubSub.publish('newTodoCreated', newTodo)
+
+        // NEXT, IMPLEMENT CHANGING TODOS; CHANGE PROPERTY, DELETE
     })
 
 
