@@ -2,6 +2,20 @@ import { pubSub } from "./pubsub";
 
 export function project() {
 
+    // subscribe to when todo is added
+    pubSub.subscribe('todoAdded',(todo) => {
+        // const index = promptProjectToAdd();
+        // selectProjectWithIndex(index).addToDo(todo);//not sure if this works
+    });
+
+    // subscribe to when projectform is submitted
+    pubSub.subscribe('projectFormSubmitted', (name) => {
+        const newProject = new Project(name); 
+
+        // when a new project is created
+        pubSub.publish('projectAdded', projectArray);
+    })
+
     let projectArray = [];
 
     const pushToArray = (project) => {
@@ -52,30 +66,21 @@ export function project() {
         }
     }
 
-
     // this should create a project and add it to projectArray. is this clean code?
-    let testProject = new Project('testProject');
 
-    // subscribe to when todo is added
-    pubSub.subscribe('todoAdded',(todo) => {
-        // const index = promptProjectToAdd();
-        // selectProjectWithIndex(index).addToDo(todo);//not sure if this works
-    });
-
-    // CREATE MORE SUBSCRIBES
-
-    // subscribe to when projectform is submitted
-    pubSub.subscribe('projectFormSubmitted', (name) => {
-        const newProject = new Project(name); 
-        console.log(projectArray);
-
-        // when a new project is created
-        // is it wise to put a publish inside a subscribe? i mean, i don't see why not
-        pubSub.publish('projectAdded', projectArray);
-    })
+    const pageLoad = () => {
+        let testProject = new Project('My First Project');
+        console.log('do this please')
+        pubSub.publish('loadPage', projectArray)
+        console.log('project array under')
+        console.log(projectArray)
+    }
 
 
 
+    // create new project on first load
+
+    pageLoad();
 }
 
 

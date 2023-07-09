@@ -26,10 +26,6 @@ export function formHandler() {
         resetForm(todoForm);
     })
 
-
-
-
-
     const projectForm = document.querySelector("#projectForm")
     console.log(projectForm)
 

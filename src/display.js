@@ -1,6 +1,9 @@
 import { pubSub } from "./pubsub";
 
 export function display() {
+    
+    // display project array on first load
+    pubSub.subscribe('loadPage', displayAllProjectOptions)
 
     // when new todo is created, display all todos
     pubSub.subscribe('newTodoCreated', displayProjectTodos)
@@ -37,11 +40,11 @@ export function display() {
     const createProjectOption = (project) => {
         const option = document.createElement('option');
         option.textContent= project.name;
-        console.log(`project name: ${project.name}`)
         projectSelect.appendChild(option);
     }
 
     function displayAllProjectOptions(projectArray) {
         projectArray.forEach(createProjectOption)
     }
+
 }

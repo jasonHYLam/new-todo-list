@@ -1,8 +1,16 @@
 import { pubSub } from "./pubsub";
+import {format} from 'date-fns';
 
 //may have to encapsulate all of this into a function
 
 function todo() {
+
+    // pubsub SUBSCRIBE
+    pubSub.subscribe('todoFormSubmitted', (args) => {
+        const newTodo = new Todo(args[0], args[1], args[2], args[3])
+        pubSub.publish('newTodoCreated',todoArray)
+        // NEXT, IMPLEMENT CHANGING TODOS; CHANGE PROPERTY, DELETE
+    })
 
     let todoArray = [];
 
@@ -31,17 +39,6 @@ function todo() {
             this[prop] = value;
         } 
     }
-
-    // pubsub SUBSCRIBE
-    pubSub.subscribe('todoFormSubmitted', (args) => {
-        const newTodo = new Todo(args[0], args[1], args[2], args[3])
-
-        pubSub.publish('newTodoCreated',todoArray)
-
-        // NEXT, IMPLEMENT CHANGING TODOS; CHANGE PROPERTY, DELETE
-    })
-
-
 }
 
 export {todo};
