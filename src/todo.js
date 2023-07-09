@@ -8,7 +8,7 @@ function todo() {
     // pubsub SUBSCRIBE
     pubSub.subscribe('todoFormSubmitted', (args) => {
         const newTodo = new Todo(args[0], args[1], args[2], args[3])
-        pubSub.publish('newTodoCreated',todoArray)
+        pubSub.publish('newTodoCreated',todoArray) //send to display.js
         // NEXT, IMPLEMENT CHANGING TODOS; CHANGE PROPERTY, DELETE
     })
 

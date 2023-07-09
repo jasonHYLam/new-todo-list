@@ -75,10 +75,7 @@ export function project() {
 
     const pageLoad = () => {
         let testProject = new Project('My First Project');
-        console.log('do this please')
         pubSub.publish('loadPage', projectArray)
-        console.log('project array under')
-        console.log(projectArray)
     }
 
 

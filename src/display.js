@@ -30,7 +30,12 @@ export function display() {
         createDOMProp('button', 'Delete');
     }
 
+    const resetTodoContainer = () => {
+        todoContainer.textContent = "";
+    }
+
     function displayProjectTodos(todoArray) {
+        resetTodoContainer();
         todoArray.forEach((todo) => createTodoDOM(todo));
     }
 

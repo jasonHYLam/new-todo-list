@@ -28,7 +28,7 @@ export function formHandler() {
         e.preventDefault();
         getProjectToSendTo();
         // pubsub for creating a new todo
-        pubSub.publish('todoFormSubmitted', getTodoArgs()); 
+        pubSub.publish('todoFormSubmitted', getTodoArgs()); //send to todo.js
         pubSub.publish('getProject', getProjectToSendTo())//may need to remove the ()
         resetForm(todoForm);
     })
