@@ -1,5 +1,6 @@
 import { pubSub } from "./pubsub";
 
+// should handle DOM related functionality. Such as creating, changing and deleting DOM elements.
 export function display() {
     
     // display project array on first load
@@ -69,5 +70,18 @@ export function display() {
         resetOptionElements();
         projectArray.forEach((project) => assignProjectOption(project))
     }
+
+    function getSelectedProject() {
+        return projectSelect.value
+
+    }
+
+    // get name of project from select
+    projectSelect.addEventListener("change", ()=> {
+        // send this code somewhere; use it to match with project
+        // IM NOT SURE THIS WORKS, getProject IS USED BY FORMHANDLER AS WELL
+        pubSub.publish("getProject", getSelectedProject())
+    })
+    
 
 }

@@ -1,5 +1,6 @@
 import { pubSub } from "./pubsub";
 
+//handles form related functionality. such as when forms are submitted.
 export function formHandler() {
 
     const resetForm = (form) => {
