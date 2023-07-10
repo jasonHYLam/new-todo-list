@@ -140,7 +140,10 @@ export function display() {
     // TODO 
     // when clicking on todo, expand it; add class that contains a larger height value
     todoContainer.addEventListener("click", (e) => {
-        if (e.)
+        console.log(e.target.classList);
+        if (e.target.classList.contains('todoDOM')) {
+            console.log('oh yea')
+        }
     })
     // show its description; maybe unhide it, by removing a hidden class
 
