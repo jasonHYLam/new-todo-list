@@ -27,10 +27,9 @@ export function formHandler() {
 
     submitTodo.addEventListener("click", (e) => {
         e.preventDefault();
-        getProjectToSendTo();
         // pubsub for creating a new todo
-        pubSub.publish('todoFormSubmitted', getTodoArgs()); //send to todo.js
         pubSub.publish('getProject', getProjectToSendTo())//may need to remove the ()
+        pubSub.publish('todoFormSubmitted', getTodoArgs()); //send to todo.js
         resetForm(todoForm);
     })
 
