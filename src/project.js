@@ -34,8 +34,8 @@ export function project() {
         setMatchingProject(newProject)
 
         // when a new project is created
-        pubSub.publish('projectAdded', projectArray);
-        pubSub.publish('displaySelectedProject', matchingProject)
+        pubSub.publish('projectAdded', projectArray); //needed to display all project options
+        pubSub.publish('displaySelectedProject', matchingProject) //needed to set header and todo to particular project
     })
 
     pubSub.subscribe('getTodoToModify', (todoIndex)=> {
