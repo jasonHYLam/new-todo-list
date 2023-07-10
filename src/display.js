@@ -16,13 +16,7 @@ export function display() {
         changeHeader(project.name);
         displayProjectTodos(project.todoArray); 
         setProjectSelectOption(project);
-        console.log('hmm');
-        // console.log('current project select value')
-        // console.log(projectSelect.value)
-        
     })
-
-
 
 
     const todoContainer = document.querySelector("#todoContainer");
@@ -36,8 +30,6 @@ export function display() {
 
     const createTodoDOM = (todo) => {
         const todoDOM = document.createElement('div');
-        // console.log(todo);
-        // console.log(todo.todoNumber);
         todoDOM.setAttribute('data-index', todo.todoNumber);
         todoDOM.appendChild(createDOMProp('span', todo.title, 'title'));
         todoDOM.appendChild(createDOMProp('span', todo.description, 'description'));
@@ -73,7 +65,6 @@ export function display() {
         const projectSelectInTodoForm = document.querySelector("#projectForTodo");
         projectSelectInTodoForm.textContent = "";
         projectSelect.textContent = "";
-
     }
 
     const assignProjectOption = (project) => {
@@ -87,25 +78,16 @@ export function display() {
     function displayAllProjectOptions(projectArray) {
         resetOptionElements();
         projectArray.forEach((project) => assignProjectOption(project))
-        // displaySelectedProjectOption()
     }
 
-    // function to choose the selected project option
     // when creating a project, make the projectSelect value be matching Project... 
     function setProjectSelectOption(project) {
-        console.log('what does this do')
-        // console.log(project.name)
+        const projectSelectInTodoForm = document.querySelector("#projectForTodo");
         for (let i = 0; i < projectSelect.length; i++) {
-            // console.log(i)
-            // console.log(projectSelect[i].textContent)
             if (projectSelect[i].textContent == project.name) {
-                console.log('even wackier console log')
-                console.log(projectSelect.value)
-                projectSelect.value = projectSelect[i]
-                console.log('random console log')
-                console.log(projectSelect[i]);
-                console.log(`project select value is ${projectSelect.value}`)
-                console.log(projectSelect.value)
+                projectSelect.value = projectSelect[i].value;
+                projectSelectInTodoForm.value = projectSelect[i].value;
+
             }
         }
     }
@@ -118,7 +100,6 @@ export function display() {
     // when clicking on project selects
     projectSelect.addEventListener("change", ()=> {
         // send this code to project.js
-        // IM NOT SURE THIS WORKS, getProject IS USED BY FORMHANDLER AS WELL
         pubSub.publish("getProjectFromProjectSelect", getSelectedProject())
     })
     
@@ -133,9 +114,8 @@ export function display() {
     todoContainer.addEventListener("click", (e) => {
         e.preventDefault();
         if (e.target.classList.contains('delete')) {
-            // console.log(e.target.parentNode.getAttribute('data-index'));
             // publish the data index of the todo DOM, to project
-            pubSub.publish('getTodoToModify', e.target.parentNode.getAttribute('data-index'));//continue working on this
+            pubSub.publish('getTodoToModify', e.target.parentNode.getAttribute('data-index'));
         }
     })
 
