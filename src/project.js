@@ -5,44 +5,22 @@ export function project() {
 
 
     let matchingProject = {};
+    //getProject and sendTodoToProjectTodoArray occur consecutively
     // subscribe to when todo is added
-    pubSub.subscribe('getProject',(projectMatch) => {//dunno what to call projectMatch; the thing that i pass to find the correct project
-        console.log('lets see if this works')
-        projectArray.forEach((project) => {
-
-            console.log(project)
-            console.log(project.todoArray)
-        })
+    pubSub.subscribe('getProjectFromTodoForm',(projectMatch) => {//dunno what to call projectMatch; the thing that i pass to find the correct project
         const selectedProject = projectArray.find((project) => {return project.name == projectMatch})//also, may need to use data attribute, rather than name. or use form vaolidation to not use same name
-
-        console.log('selected project todo array')
-
-        console.log(selectedProject)
-        console.log(selectedProject.todoArray)
         setMatchingProject(selectedProject);
-        // oh boy what do i do here, because the function i want to call has two arguments that come from different places...
-        // need a todo, should i just send it here first
-        // and then put it in addTodoToProjectArray
-
-
-        // deal with this later
-        // pubSub to display the todos; send to display.js
-        // pubSub.publish("displaySelectedProjectElements", selectedProject);
-        console.log('x')
-        console.log(matchingProject);
-        console.log('matching project todo array');
-        console.log(matchingProject.todoArray)
-
     });
 
     //add todo to project todoArray
     pubSub.subscribe('sendTodoToProjectTodoArray', (todo) => {
-        console.log('y')
-        console.log(matchingProject);
-        // matchingProject.addToDo(todo)
-        // console.log(matchingProject);
         addTodoToProjectArray(matchingProject, todo)
         console.log(matchingProject);
+
+        // deal with this later
+        // pubSub to display the todos; send to display.js
+        // pubSub.publish("displaySelectedProjectElements", selectedProject);
+
     });
 
     // subscribe to when projectform is submitted

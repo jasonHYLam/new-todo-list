@@ -6,10 +6,8 @@ import {format} from 'date-fns';
 function todo() {
 
     // pubsub SUBSCRIBE
-    pubSub.subscribe('todoFormSubmitted', (args) => {
+    pubSub.subscribe('todoFormSubmitted', (args) => {//probably could destructure this tbh
         const newTodo = new Todo(args[0], args[1], args[2], args[3])
-
-        pubSub.publish('newTodoCreated',todoArray) //send to display.js ; also, this is the wrong todo array... i need to send this to a project array.
 
         // in fact, what i think needs to happen is to publish the todo to an event, and project will subscribe to put that in todoarray.
         // and then that will publish to display.

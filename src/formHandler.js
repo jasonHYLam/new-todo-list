@@ -19,7 +19,7 @@ export function formHandler() {
     return todoArgs;
     }
 
-    const getProjectToSendTo = () => {
+    const getSelectedProjectOption = () => {
         const project = document.querySelector("#projectForTodo");
         return project.value;
         // may need to refactor to use data attribute and index... phooey
@@ -28,7 +28,8 @@ export function formHandler() {
     submitTodo.addEventListener("click", (e) => {
         e.preventDefault();
         // pubsub for creating a new todo
-        pubSub.publish('getProject', getProjectToSendTo())//may need to remove the ()
+        //try swapping these and see what happens
+        pubSub.publish('getProjectFromTodoForm', getSelectedProjectOption())//send to project.js
         pubSub.publish('todoFormSubmitted', getTodoArgs()); //send to todo.js
         resetForm(todoForm);
     })

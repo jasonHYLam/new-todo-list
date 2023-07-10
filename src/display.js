@@ -87,7 +87,7 @@ export function display() {
 
     }
 
-    // get name of project from select
+    // when clicking on project selects
     projectSelect.addEventListener("change", ()=> {
         // send this code to project.js
         // IM NOT SURE THIS WORKS, getProject IS USED BY FORMHANDLER AS WELL
