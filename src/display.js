@@ -4,7 +4,7 @@ import { pubSub } from "./pubsub";
 export function display() {
     
     // display project array on first load
-    pubSub.subscribe('loadPage', displayAllProjectOptions)
+    pubSub.subscribe('loadInitialOptions', displayAllProjectOptions);
 
     // when new todo is created, display all todos
     pubSub.subscribe('newTodoCreated', displayProjectTodos)

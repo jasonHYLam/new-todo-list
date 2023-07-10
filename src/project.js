@@ -101,6 +101,7 @@ export function project() {
     // create new project on first load
 
     pageLoad();
+    console.log(matchingProject)
 }
 
 
