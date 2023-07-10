@@ -93,7 +93,12 @@ export function project() {
 
     const pageLoad = () => {
         let testProject = new Project('My First Project');
-        pubSub.publish('loadPage', projectArray)
+        // added this below
+        setMatchingProject(testProject);
+        pubSub.publish('loadInitialOptions', projectArray);
+
+        // added this below
+        pubSub.publish('loadInitialProject', matchingProject);
     }
 
 

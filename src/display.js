@@ -5,6 +5,11 @@ export function display() {
     
     // display project array on first load
     pubSub.subscribe('loadInitialOptions', displayAllProjectOptions);
+    pubSub.subscribe('loadInitialProject', (project) => {
+        changeHeader(project.name);
+        displayProjectTodos(project.todoArray); 
+        setProjectSelectOption(project);
+    })
 
     // when new todo is created, display all todos
     pubSub.subscribe('newTodoCreated', displayProjectTodos)
