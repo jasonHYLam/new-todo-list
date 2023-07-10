@@ -109,7 +109,7 @@ export function display() {
     })
     
 
-    const header = document.querySelector("#header");
+    const header = document.querySelector("#project-header");
     const changeHeader = (projectName) => {
         header.textContent = "";
         header.textContent = projectName;
@@ -128,11 +128,9 @@ export function display() {
     todoContainer.addEventListener("click", (e) => {
         e.preventDefault();
         if (e.target.classList.contains('change')) {
-            // publish the data index of the todo DOM, to project
-
-            // then be sent back a form with initial values being of that project
-            // and when clicking submit, send back to that project
-            // then be sent back the project array
+            // create a form where initial values are that of the todo DOM text
+            // and when clicking submit, send todo index to project.js to get corresponding todo, so that it can be modified
+            // then be sent the project so that it can be displayed again
         }
     })
 

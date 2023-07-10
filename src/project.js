@@ -101,12 +101,8 @@ export function project() {
         pubSub.publish('loadInitialProject', matchingProject);
     }
 
-
-
     // create new project on first load
-
     pageLoad();
-    console.log(matchingProject)
 }
 
 
