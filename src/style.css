@@ -1,5 +1,14 @@
+body {
+    height: 100vh;
+    margin: 0;
+}
 #body {
     display: flex;
-    background-color: red;
+    height: 100vh;
 
+
+}
+
+#left {
+    background-color: blueviolet;
 }
