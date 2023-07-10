@@ -3,6 +3,8 @@ import { pubSub } from "./pubsub";
 // should handle DOM related functionality. Such as creating, changing and deleting DOM elements.
 export function display() {
     
+
+
     // display project array on first load
     pubSub.subscribe('loadInitialOptions', displayAllProjectOptions);
     pubSub.subscribe('loadInitialProject', (project) => {
@@ -35,6 +37,7 @@ export function display() {
 
     const createTodoDOM = (todo) => {
         const todoDOM = document.createElement('div');
+        todoDOM.classList.add('todoDOM');
         todoDOM.setAttribute('data-index', todo.todoNumber);
         todoDOM.appendChild(createDOMProp('span', todo.title, 'title'));
         todoDOM.appendChild(createDOMProp('span', todo.description, 'description'));
@@ -134,5 +137,18 @@ export function display() {
         }
     })
 
+    // TODO 
+    // when clicking on todo, expand it; add class that contains a larger height value
+    todoContainer.addEventListener("click", (e) => {
+        if (e.)
+    })
+    // show its description; maybe unhide it, by removing a hidden class
+
+    // priortiy color; value of priority should determine color of A div, by use of function to add class to that div
+    // probably use switch function
+
+    // when clicking again, add the hidden class to description and remove class of expansion
+
+    //when changing todo, send form input, send DOM index, then display matching todo
 
 }
