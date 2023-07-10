@@ -13,10 +13,10 @@ export function display() {
     pubSub.subscribe('projectAdded', displayAllProjectOptions);
 
     pubSub.subscribe('displaySelectedProject', (project) => {
-        console.log('project')
-        console.log(project)
-        console.log('project array')
-        console.log(project.todoArray)
+        // console.log('project')
+        // console.log(project)
+        // console.log('project array')
+        // console.log(project.todoArray)
         changeHeader(project.name);
         displayProjectTodos(project.todoArray);
     })
@@ -34,6 +34,9 @@ export function display() {
 
     const createTodoDOM = (todo) => {
         const todoDOM = document.createElement('div');
+        // console.log(todo);
+        // console.log(todo.todoNumber);
+        todoDOM.setAttribute('data-index', todo.todoNumber);
         todoDOM.appendChild(createDOMProp('span', todo.title, 'title'));
         todoDOM.appendChild(createDOMProp('span', todo.description, 'description'));
         todoDOM.appendChild(createDOMProp('span', todo.dueDate, 'dueDate'));
@@ -102,10 +105,13 @@ export function display() {
         header.textContent = projectName;
     }
 
+    // delete todo DOM
     todoContainer.addEventListener("click", (e) => {
+        e.preventDefault();
         if (e.target.classList.contains('delete')) {
-            console.log(e.target.parentNode)
-
+            // console.log(e.target.parentNode.getAttribute('data-index'));
+            // publish the data index of the todo DOM, to project
+            pubSub.publish('getTodoToModify', e.target.parentNode.getAttribute('data-index'));//continue working on this
         }
     })
 

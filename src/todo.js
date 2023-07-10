@@ -14,14 +14,10 @@ function todo() {
         // NEXT, IMPLEMENT CHANGING TODOS; CHANGE PROPERTY, DELETE
     })
 
-    let todoArray = [];
+    let todoCounter = 0;
 
-    const pushToArray = (todo) => {
-        todoArray.push(todo);
-    }
-
-    const displayArray = () => {
-        console.log(todoArray);
+    const incrementCounter = () => {
+        todoCounter++
     }
 
 
@@ -31,8 +27,8 @@ function todo() {
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
-        // when todo is created, push to todoarray
-        pushToArray(this);
+        this.todoNumber = todoCounter;
+        incrementCounter();
 
         // may have to move this elsewhere, but when new todo is created, append it to a project todoArray
         pubSub.publish('sendTodoToProjectTodoArray', this)

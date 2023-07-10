@@ -4,6 +4,7 @@ export function project() {
     let projectArray = [];
 
 
+    // is matchingProject variable flawed?
     let matchingProject = {};
     //getProject and sendTodoToProjectTodoArray occur consecutively
     // get project from todo form; first get matching project, then wait for todo to be added to the project
@@ -24,6 +25,7 @@ export function project() {
         addTodoToProjectArray(matchingProject, todo)
         // pubSub to display the todos; send to display.js
         pubSub.publish('displaySelectedProject', matchingProject)
+        console.log(projectArray);
     });
 
     // subscribe to when projectform is submitted
@@ -36,6 +38,22 @@ export function project() {
         pubSub.publish('displaySelectedProject', matchingProject)
     })
 
+    pubSub.subscribe('getTodoToModify', (todoIndex)=> {
+
+        // const test = (matchingProject.todoArray.find((todo) => {return todo.todoNumber == todoIndex}))
+        // console.log(test)
+
+        // modifies in place, mutating the original array. this is what we want
+        matchingProject.todoArray.splice(
+            matchingProject.todoArray.findIndex
+            ((item) => item.todoNumber == todoIndex), 
+            1)
+
+        // now display again
+        pubSub.publish('displaySelectedProject', matchingProject)
+
+        console.log(projectArray);
+    })
 
 
     const setMatchingProject = (project) => {
@@ -51,20 +69,6 @@ export function project() {
 
     const getArray = () => projectArray;
 
-    const displayArray = () => {
-        console.log(projectArray);
-    }
-
-    const promptProjectToAdd = () => {
-        return prompt(`choose a project! ${getArray().map((p, index) => [p.name, index])}`);
-    }
-
-    const selectProjectWithIndex = (index) => {
-        return getArray()[index];
-    }
-
-    //delete project;  
-    // create project
 
     class Project {
         constructor(name) {
