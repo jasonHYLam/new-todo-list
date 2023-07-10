@@ -6,21 +6,24 @@ export function project() {
 
     let matchingProject = {};
     //getProject and sendTodoToProjectTodoArray occur consecutively
-    // subscribe to when todo is added
+    // get project from todo form; first get matching project, then wait for todo to be added to the project
     pubSub.subscribe('getProjectFromTodoForm',(projectMatch) => {//dunno what to call projectMatch; the thing that i pass to find the correct project
         const selectedProject = projectArray.find((project) => {return project.name == projectMatch})//also, may need to use data attribute, rather than name. or use form vaolidation to not use same name
         setMatchingProject(selectedProject);
     });
 
+    //get project from project select; immediately publish to display array
+    pubSub.subscribe('getProjectFromProjectSelect',(projectMatch) => {
+        const selectedProject = projectArray.find((project) => {return project.name == projectMatch})
+        setMatchingProject(selectedProject);
+        pubSub.publish('displaySelectedProject', matchingProject)
+    });
+
     //add todo to project todoArray
     pubSub.subscribe('sendTodoToProjectTodoArray', (todo) => {
         addTodoToProjectArray(matchingProject, todo)
-        console.log(matchingProject);
-
-        // deal with this later
         // pubSub to display the todos; send to display.js
-        // pubSub.publish("displaySelectedProjectElements", selectedProject);
-
+        pubSub.publish('displaySelectedProject', matchingProject)
     });
 
     // subscribe to when projectform is submitted

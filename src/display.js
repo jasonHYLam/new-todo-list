@@ -12,7 +12,7 @@ export function display() {
     // when creating new project, display all projects
     pubSub.subscribe('projectAdded', displayAllProjectOptions);
 
-    pubSub.subscribe('displaySelectedProjectElements', (project) => {
+    pubSub.subscribe('displaySelectedProject', (project) => {
         console.log('project')
         console.log(project)
         console.log('project array')
@@ -91,7 +91,7 @@ export function display() {
     projectSelect.addEventListener("change", ()=> {
         // send this code to project.js
         // IM NOT SURE THIS WORKS, getProject IS USED BY FORMHANDLER AS WELL
-        pubSub.publish("getProject", getSelectedProject())
+        pubSub.publish("getProjectFromProjectSelect", getSelectedProject())
     })
     
 
