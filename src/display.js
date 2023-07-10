@@ -13,13 +13,15 @@ export function display() {
     pubSub.subscribe('projectAdded', displayAllProjectOptions);
 
     pubSub.subscribe('displaySelectedProject', (project) => {
-        // console.log('project')
-        // console.log(project)
-        // console.log('project array')
-        // console.log(project.todoArray)
         changeHeader(project.name);
-        displayProjectTodos(project.todoArray);
+        displayProjectTodos(project.todoArray); 
+        setProjectSelectOption(project);
+        console.log('hmm');
+        // console.log('current project select value')
+        // console.log(projectSelect.value)
+        
     })
+
 
 
 
@@ -63,6 +65,7 @@ export function display() {
     const createOptionElement = (project) => {
         const option = document.createElement('option');
         option.textContent = project.name;
+        option.value = project.name;
         return option;
     }
 
@@ -84,6 +87,27 @@ export function display() {
     function displayAllProjectOptions(projectArray) {
         resetOptionElements();
         projectArray.forEach((project) => assignProjectOption(project))
+        // displaySelectedProjectOption()
+    }
+
+    // function to choose the selected project option
+    // when creating a project, make the projectSelect value be matching Project... 
+    function setProjectSelectOption(project) {
+        console.log('what does this do')
+        // console.log(project.name)
+        for (let i = 0; i < projectSelect.length; i++) {
+            // console.log(i)
+            // console.log(projectSelect[i].textContent)
+            if (projectSelect[i].textContent == project.name) {
+                console.log('even wackier console log')
+                console.log(projectSelect.value)
+                projectSelect.value = projectSelect[i]
+                console.log('random console log')
+                console.log(projectSelect[i]);
+                console.log(`project select value is ${projectSelect.value}`)
+                console.log(projectSelect.value)
+            }
+        }
     }
 
     function getSelectedProject() {

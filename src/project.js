@@ -36,6 +36,7 @@ export function project() {
         // when a new project is created
         pubSub.publish('projectAdded', projectArray);
         pubSub.publish('displaySelectedProject', matchingProject)
+        // CHOOSE selected project too
     })
 
     pubSub.subscribe('getTodoToModify', (todoIndex)=> {
@@ -45,9 +46,7 @@ export function project() {
 
         // modifies in place, mutating the original array. this is what we want
         matchingProject.todoArray.splice(
-            matchingProject.todoArray.findIndex
-            ((item) => item.todoNumber == todoIndex), 
-            1)
+            matchingProject.todoArray.findIndex((item) => item.todoNumber == todoIndex), 1)
 
         // now display again
         pubSub.publish('displaySelectedProject', matchingProject)
