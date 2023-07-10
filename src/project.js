@@ -29,9 +29,11 @@ export function project() {
     // subscribe to when projectform is submitted
     pubSub.subscribe('projectFormSubmitted', (name) => {
         const newProject = new Project(name); 
+        setMatchingProject(newProject)
 
         // when a new project is created
         pubSub.publish('projectAdded', projectArray);
+        pubSub.publish('displaySelectedProject', matchingProject)
     })
 
 
