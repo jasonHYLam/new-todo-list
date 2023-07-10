@@ -6,11 +6,22 @@ export function project() {
     pubSub.subscribe('getProject',(projectMatch) => {//dunno what to call projectMatch; the thing that i pass to find the correct project
         const selectedProject = projectArray.filter((project) => project.name == projectMatch)//also, may need to use data attribute, rather than name. or use form vaolidation to not use same name
 
+        // oh boy what do i do here, because the function i want to call has two arguments that come from different places...
+        // need a todo, should i just send it here first
+        // and then put it in addTodoToProjectArray
+        console.log('does THIS occur')
 
         // pubSub to display the todos; send to display.js
-        pubSub.publish("displaySelectedProjectElements", selectedProject);
+
+        // deal with this later
+        // pubSub.publish("displaySelectedProjectElements", selectedProject);
 
     });
+
+    // where do i put this frickin thing
+        pubSub.subscribe('sendTodoToProjectTodoArray', (todo) => {
+            console.log(todo)
+        });
 
     // subscribe to when projectform is submitted
     pubSub.subscribe('projectFormSubmitted', (name) => {
@@ -22,11 +33,16 @@ export function project() {
 
     // need to get a project first
     // add to a project's todoArray
-    pubSub.subscribe()
+    // pubSub.subscribe()
 
 
 
     let projectArray = [];
+
+
+    const addTodoToProjectArray = (project, todo) => {
+        project.todoArray.push(todo)
+    }
 
     const increaseProjects = (project) => {
         projectArray.push(project)
