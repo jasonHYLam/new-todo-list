@@ -124,4 +124,17 @@ export function display() {
         }
     })
 
+    // click change todo button
+    todoContainer.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (e.target.classList.contains('change')) {
+            // publish the data index of the todo DOM, to project
+
+            // then be sent back a form with initial values being of that project
+            // and when clicking submit, send back to that project
+            // then be sent back the project array
+        }
+    })
+
+
 }
