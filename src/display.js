@@ -26,22 +26,28 @@ export function display() {
     const todoContainer = document.querySelector("#todoContainer");
 
     const createDOMProp = (elType, value, className) => {
-        const todoDOM = document.createElement('div');
         const todoProp = document.createElement(elType);
         todoProp.textContent = value;
         todoProp.classList.add(className);
-        todoDOM.appendChild(todoProp);
-        todoContainer.appendChild(todoDOM);
+        return todoProp;
         // change 
     }
 
     const createTodoDOM = (todo) => {
-        createDOMProp('span', todo.title, 'title');
-        createDOMProp('span', todo.description, 'description');
-        createDOMProp('span', todo.dueDate, 'dueDate');
-        createDOMProp('span', todo.priority, 'priority');
-        createDOMProp('button', 'Change', 'change');
-        createDOMProp('button', 'Delete', 'delete');
+        const todoDOM = document.createElement('div');
+        // todoDOM.appendChild(createDOMProp('span', todo.title, 'title'));
+        // createDOMProp('span', todo.description, 'description');
+        // createDOMProp('span', todo.dueDate, 'dueDate');
+        // createDOMProp('span', todo.priority, 'priority');
+        // createDOMProp('button', 'Change', 'change');
+        // createDOMProp('button', 'Delete', 'delete');
+        todoDOM.appendChild(createDOMProp('span', todo.title, 'title'));
+        todoDOM.appendChild(createDOMProp('span', todo.description, 'description'));
+        todoDOM.appendChild(createDOMProp('span', todo.dueDate, 'dueDate'));
+        todoDOM.appendChild(createDOMProp('span', todo.priority, 'priority'));
+        todoDOM.appendChild(createDOMProp('button', 'Change', 'change'));
+        todoDOM.appendChild(createDOMProp('button', 'Delete', 'delete'));
+        todoContainer.appendChild(todoDOM);
     }
 
     const resetTodoContainer = () => {
@@ -104,8 +110,9 @@ export function display() {
     }
 
     todoContainer.addEventListener("click", (e) => {
-        console.log(e.target)
-        // if (e)
+        if (e.target.classList.contains('delete')) {
+
+        }
     })
 
 }
