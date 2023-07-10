@@ -30,17 +30,10 @@ export function display() {
         todoProp.textContent = value;
         todoProp.classList.add(className);
         return todoProp;
-        // change 
     }
 
     const createTodoDOM = (todo) => {
         const todoDOM = document.createElement('div');
-        // todoDOM.appendChild(createDOMProp('span', todo.title, 'title'));
-        // createDOMProp('span', todo.description, 'description');
-        // createDOMProp('span', todo.dueDate, 'dueDate');
-        // createDOMProp('span', todo.priority, 'priority');
-        // createDOMProp('button', 'Change', 'change');
-        // createDOMProp('button', 'Delete', 'delete');
         todoDOM.appendChild(createDOMProp('span', todo.title, 'title'));
         todoDOM.appendChild(createDOMProp('span', todo.description, 'description'));
         todoDOM.appendChild(createDOMProp('span', todo.dueDate, 'dueDate'));
@@ -111,6 +104,7 @@ export function display() {
 
     todoContainer.addEventListener("click", (e) => {
         if (e.target.classList.contains('delete')) {
+            console.log(e.target.parentNode)
 
         }
     })
