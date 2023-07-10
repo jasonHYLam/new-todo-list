@@ -25,21 +25,23 @@ export function display() {
 
     const todoContainer = document.querySelector("#todoContainer");
 
-    const createDOMProp = (elType, value) => {
+    const createDOMProp = (elType, value, className) => {
         const todoDOM = document.createElement('div');
         const todoProp = document.createElement(elType);
         todoProp.textContent = value;
+        todoProp.classList.add(className);
         todoDOM.appendChild(todoProp);
         todoContainer.appendChild(todoDOM);
+        // change 
     }
 
     const createTodoDOM = (todo) => {
-        createDOMProp('span', todo.title);
-        createDOMProp('span', todo.description);
-        createDOMProp('span', todo.dueDate);
-        createDOMProp('span', todo.priority);
-        createDOMProp('button', 'Change');
-        createDOMProp('button', 'Delete');
+        createDOMProp('span', todo.title, 'title');
+        createDOMProp('span', todo.description, 'description');
+        createDOMProp('span', todo.dueDate, 'dueDate');
+        createDOMProp('span', todo.priority, 'priority');
+        createDOMProp('button', 'Change', 'change');
+        createDOMProp('button', 'Delete', 'delete');
     }
 
     const resetTodoContainer = () => {
@@ -100,5 +102,10 @@ export function display() {
         header.textContent = "";
         header.textContent = projectName;
     }
+
+    todoContainer.addEventListener("click", (e) => {
+        console.log(e.target)
+        // if (e)
+    })
 
 }
