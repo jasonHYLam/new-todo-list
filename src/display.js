@@ -157,7 +157,7 @@ export function display() {
         if (e.target.tagName == 'BUTTON') return;
         const todoDOM = (e.target.closest(".todoDOM"));
         if (todoDOM) {
-            // hideAllTodoExpansions();
+            hideAllTodoExpansions();
             toggleExpandTodo(todoDOM)
         }
     })
@@ -168,12 +168,14 @@ export function display() {
     }
 
     function hideAllTodoExpansions() {
-        const allExpanded = document.querySelector(".expanded")
-        allExpanded.forEach((todo) => {
+        const allExpanded = document.querySelectorAll(".expanded")
+
+        for (let todo of allExpanded) {
+
             if (!todo.classList.contains("hidden")) {
                 todo.classList.add("hidden");
             }
-        })
+        }
 
     }
 
