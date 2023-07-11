@@ -29,5 +29,8 @@ body {
 
 .todoDOM.expanded {
     height: 75px;
+}
 
+.description.hidden {
+    display: none;
 }

@@ -32,6 +32,9 @@ export function display() {
         const todoProp = document.createElement(elType);
         todoProp.textContent = value;
         todoProp.classList.add(className);
+        if (className == 'description') {
+            todoProp.classList.add('hidden');
+        }
         return todoProp;
     }
 
