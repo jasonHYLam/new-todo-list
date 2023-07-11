@@ -70,6 +70,10 @@ export function display() {
         todoContainer.appendChild(todoDOM);
     }
 
+    const createMainTodoContent = () => {
+
+    }
+
     const setPriorityClass = (todo, todoDOM) => {
         switch(todo.priority) {
             case 'low':
@@ -82,6 +86,36 @@ export function display() {
                 todoDOM.classList.add('high-priority');
                 break;
         }
+    }
+
+    const createFormInTodo = () => {
+        const form = createDOMProp('form', "", 'formInTodo');
+        const title = createDOMProp('input', "", "title");
+        const description = createDOMProp('input', "", "description");
+        const date = createDOMProp('input', "", "date");
+        date.setAttribute('type', 'date');
+        const priority = createDOMProp('select', "", "priority");
+        const submit = createDOMProp('button', "", "button");
+
+        const lowPriority = createDOMProp('option', 'low', '')
+        lowPriority.textContent = "Not urgent";
+        priority.appendChild(lowPriority)
+
+        const mediumPriority = createDOMProp('option', 'medium', '')
+        mediumPriority.textContent = "Not too urgent";
+        priority.appendChild(mediumPriority)
+
+        const highPriority = createDOMProp('option', 'high', '')
+        highPriority.textContent = "Urgent";
+        priority.appendChild(highPriority);
+
+        form.appendChild(title);
+        form.appendChild(description);
+        form.appendChild(date);
+        form.appendChild(priority);
+        form.appendChild(submit);
+
+        return form;
     }
 
     const resetTodoContainer = () => {
