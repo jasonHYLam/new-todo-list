@@ -53,7 +53,7 @@ export function display() {
         todoTop.appendChild(todoTopLeft)
         todoTopLeft.appendChild(createDOMProp('span', todo.title, 'title'));
 
-        const todoTopRight = createDOMProp('div', "", "todoTopLeft");
+        const todoTopRight = createDOMProp('div', "", "todoTopRight");
         todoTop.appendChild(todoTopRight)
         todoTopRight.appendChild(createDOMProp('span', todo.dueDate, 'dueDate'));
         todoTopRight.appendChild(createDOMProp('button', 'Change', 'change'));
