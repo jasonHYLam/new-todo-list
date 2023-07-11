@@ -45,8 +45,39 @@ export function display() {
         const todoDOM = document.createElement('div');
         todoDOM.classList.add('todoDOM');
         todoDOM.setAttribute('data-index', todo.todoNumber);
-        setPriorityClass(todo, todoDOM);
 
+        // setPriorityClass(todo, todoDOM);
+
+        // const todoTop = createDOMProp('div',"","todoTop")
+
+        // const todoTopLeft = createDOMProp('div', "", "todoTopLeft");
+        // todoTop.appendChild(todoTopLeft)
+        // todoTopLeft.appendChild(createDOMProp('span', todo.title, 'title'));
+
+        // const todoTopRight = createDOMProp('div', "", "todoTopRight");
+        // todoTop.appendChild(todoTopRight)
+        // todoTopRight.appendChild(createDOMProp('span', todo.dueDate, 'dueDate'));
+        // todoTopRight.appendChild(createDOMProp('button', 'Change', 'change'));
+        // todoTopRight.appendChild(createDOMProp('button', 'Delete', 'delete'));
+    
+
+        // const expanded = createDOMProp('div',"","expanded")
+        // expanded.classList.add('hidden');
+        // expanded.appendChild(createDOMProp('span', todo.priority, 'priority'));
+        // expanded.appendChild(createDOMProp('span', todo.description, 'description'));
+
+        // todoDOM.appendChild(todoTop);
+        // todoDOM.appendChild(expanded);
+        todoDOM.appendChild(createMainTodoContent(todo));
+        todoDOM.appendChild(createFormInTodo());
+        todoContainer.appendChild(todoDOM);
+    }
+
+    const createMainTodoContent = (todo) => {        
+
+        const todoMainContent = document.createElement('div');
+        todoMainContent.classList.add('todoMainContent');
+        setPriorityClass(todo, todoMainContent);
         const todoTop = createDOMProp('div',"","todoTop")
 
         const todoTopLeft = createDOMProp('div', "", "todoTopLeft");
@@ -65,13 +96,11 @@ export function display() {
         expanded.appendChild(createDOMProp('span', todo.priority, 'priority'));
         expanded.appendChild(createDOMProp('span', todo.description, 'description'));
 
-        todoDOM.appendChild(todoTop);
-        todoDOM.appendChild(expanded);
-        todoContainer.appendChild(todoDOM);
-    }
+        todoMainContent.appendChild(todoTop);
+        todoMainContent.appendChild(expanded);
+        // todoContainer.appendChild(todoDOM);
 
-    const createMainTodoContent = () => {
-
+        return todoMainContent;
     }
 
     const setPriorityClass = (todo, todoDOM) => {
@@ -97,16 +126,13 @@ export function display() {
         const priority = createDOMProp('select', "", "priority");
         const submit = createDOMProp('button', "", "button");
 
-        const lowPriority = createDOMProp('option', 'low', '')
-        lowPriority.textContent = "Not urgent";
+        const lowPriority = createDOMProp('option', 'Not urgent', 'low')
         priority.appendChild(lowPriority)
 
-        const mediumPriority = createDOMProp('option', 'medium', '')
-        mediumPriority.textContent = "Not too urgent";
+        const mediumPriority = createDOMProp('option', 'Not too urgent', 'medium')
         priority.appendChild(mediumPriority)
 
-        const highPriority = createDOMProp('option', 'high', '')
-        highPriority.textContent = "Urgent";
+        const highPriority = createDOMProp('option', 'Urgent', 'high')
         priority.appendChild(highPriority);
 
         form.appendChild(title);
