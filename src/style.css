@@ -26,6 +26,14 @@ body {
     padding-left: 30px;
 }
 
+#left-top, #left-bottom {
+    margin-top: 50px;
+}
+
+#left-top p, #left-bottom p {
+    font-size: 20px;
+}
+
 #right {
     flex: 1;
     margin-left: 60px;
@@ -34,6 +42,11 @@ body {
 
 #project-header {
     margin-top: 40px;
+    font-size: 30px;
+}
+
+#add-todo-text {
+    font-size: 30px;
 }
 
 
@@ -96,7 +109,7 @@ body {
 } */
 
 .low-priority {
-    border-left: palegoldenrod solid 15px;
+    border-left: rgb(255, 254, 240) solid 15px;
 }
 
 .medium-priority {

@@ -3,8 +3,6 @@ import { pubSub } from "./pubsub";
 export function project() {
     let projectArray = [];
 
-
-    // is matchingProject variable flawed?
     let matchingProject = {};
     //getProject and sendTodoToProjectTodoArray occur consecutively
     // get project from todo form; first get matching project, then wait for todo to be added to the project
