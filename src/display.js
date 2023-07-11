@@ -44,12 +44,14 @@ export function display() {
         const todoDOM = document.createElement('div');
         todoDOM.classList.add('todoDOM');
         todoDOM.setAttribute('data-index', todo.todoNumber);
+        setPriorityClass(todo, todoDOM);
 
         const todoTop = createDOMProp('div',"","todoTop")
         todoTop.appendChild(createDOMProp('span', todo.title, 'title'));
         todoTop.appendChild(createDOMProp('span', todo.dueDate, 'dueDate'));
         todoTop.appendChild(createDOMProp('button', 'Change', 'change'));
         todoTop.appendChild(createDOMProp('button', 'Delete', 'delete'));
+    
 
         const expanded = createDOMProp('div',"","expanded")
         expanded.classList.add('hidden');
@@ -59,6 +61,20 @@ export function display() {
         todoDOM.appendChild(todoTop);
         todoDOM.appendChild(expanded);
         todoContainer.appendChild(todoDOM);
+    }
+
+    const setPriorityClass = (todo, todoDOM) => {
+        switch(todo.priority) {
+            case 'low':
+                todoDOM.classList.add('low-priority');
+                break;
+            case 'medium':
+                todoDOM.classList.add('medium-priority');
+                break;
+            case 'high':
+                todoDOM.classList.add('high-priority');
+                break;
+        }
     }
 
     const resetTodoContainer = () => {
@@ -157,12 +173,13 @@ export function display() {
         if (e.target.tagName == 'BUTTON') return;
         const todoDOM = (e.target.closest(".todoDOM"));
         if (todoDOM) {
-            hideAllTodoExpansions();
             toggleExpandTodo(todoDOM)
         }
     })
 
     function toggleExpandTodo(el) {
+
+            hideAllTodoExpansions();
         const bottom = el.querySelector(".expanded");
         bottom.classList.contains('hidden') ? bottom.classList.remove('hidden'):bottom.classList.add('hidden');
     }
@@ -171,6 +188,7 @@ export function display() {
         const allExpanded = document.querySelectorAll(".expanded")
 
         for (let todo of allExpanded) {
+            console.log(!todo.classList.contains('hidden'))
 
             if (!todo.classList.contains("hidden")) {
                 todo.classList.add("hidden");
@@ -178,9 +196,6 @@ export function display() {
         }
 
     }
-
-    // }
-    // show its description; maybe unhide it, by removing a hidden class
 
     // priortiy color; value of priority should determine color of A div, by use of function to add class to that div
     // probably use switch function
