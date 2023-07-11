@@ -45,18 +45,18 @@ export function display() {
         todoDOM.classList.add('todoDOM');
         todoDOM.setAttribute('data-index', todo.todoNumber);
 
-        const top = createDOMProp('div',"","todoTop")
-        top.appendChild(createDOMProp('span', todo.title, 'title'));
-        top.appendChild(createDOMProp('span', todo.dueDate, 'dueDate'));
-        top.appendChild(createDOMProp('button', 'Change', 'change'));
-        top.appendChild(createDOMProp('button', 'Delete', 'delete'));
+        const todoTop = createDOMProp('div',"","todoTop")
+        todoTop.appendChild(createDOMProp('span', todo.title, 'title'));
+        todoTop.appendChild(createDOMProp('span', todo.dueDate, 'dueDate'));
+        todoTop.appendChild(createDOMProp('button', 'Change', 'change'));
+        todoTop.appendChild(createDOMProp('button', 'Delete', 'delete'));
 
-        const expanded = createDOMProp('div',"","todoBottom")
+        const expanded = createDOMProp('div',"","expanded")
         expanded.classList.add('hidden');
         expanded.appendChild(createDOMProp('span', todo.priority, 'priority'));
         expanded.appendChild(createDOMProp('span', todo.description, 'description'));
 
-        todoDOM.appendChild(top);
+        todoDOM.appendChild(todoTop);
         todoDOM.appendChild(expanded);
         todoContainer.appendChild(todoDOM);
     }
@@ -155,23 +155,25 @@ export function display() {
     todoContainer.addEventListener("click", (e) => {
 
         if (e.target.tagName == 'BUTTON') return;
-        // refactor so that bottom says expanded
-        if (e.target.classList.contains('todoDOM')) {
-            toggleExpandTodo(e.target);
-            toggleShowDescription(e.target);
+        const todoDOM = (e.target.closest(".todoDOM"));
+        if (todoDOM) {
+        console.log(todoDOM)
+            toggleExpandTodo(todoDOM)
         }
     })
 
     function toggleExpandTodo(el) {
-        el.classList.contains('expanded')? el.classList.remove('expanded'): el.classList.add('expanded');
+        const bottom = el.querySelector(".expanded");
+        console.log(bottom);
+        bottom.classList.contains('hidden') ? bottom.classList.remove('hidden'):bottom.classList.add('hidden');
     }
 
-    function toggleShowDescription(el) {
-        const description = el.querySelector(".description")
-        description.classList.contains('hidden')? description.classList.remove('hidden') : description.classList.add('hidden');
+    // function toggleShowDescription(el) {
+    //     const description = el.querySelector(".description")
+    //     description.classList.contains('hidden')? description.classList.remove('hidden') : description.classList.add('hidden');
 
 
-    }
+    // }
     // show its description; maybe unhide it, by removing a hidden class
 
     // priortiy color; value of priority should determine color of A div, by use of function to add class to that div

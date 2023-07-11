@@ -27,9 +27,12 @@ body {
     border: none;
 }
 
-.todoDOM.expanded {
-    height: 75px;
+.expanded.hidden {
+    display: none;
 }
+/* .todoDOM.expanded {
+    height: 75px;
+} */
 
 .description.hidden {
     display: none;
