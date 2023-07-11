@@ -80,7 +80,7 @@ export function project() {
     // this should create a project and add it to projectArray. is this clean code?
 
     const pageLoad = () => {
-        let testProject = new Project('My First Project');
+        let testProject = new Project('My First Project!');
         // added this below
         setMatchingProject(testProject);
         pubSub.publish('loadInitialOptions', projectArray);
