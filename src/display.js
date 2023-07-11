@@ -178,6 +178,13 @@ export function display() {
         }
     })
 
+    function toggleExpandTodoAndCloseOthers(el) {
+        removeCurrentClicked();
+        setCurrentClicked(el);
+        hideAllTodoExpansions();
+        toggleExpandTodo(el);
+    }
+
     function setCurrentClicked(todoDOM) {
         todoDOM.classList.add('current-clicked');
     }
@@ -189,37 +196,19 @@ export function display() {
         }
     }
 
-    function toggleExpandTodo(el) {
-        const bottom = el.querySelector(".expanded");
-        bottom.classList.contains('hidden') ? bottom.classList.remove('hidden'):bottom.classList.add('hidden');
-    }
-
-
-    function toggleExpandTodoAndCloseOthers(el) {
-
-        removeCurrentClicked();
-        setCurrentClicked(el);
-        hideAllTodoExpansions();
-        toggleExpandTodo(el);
-    }
-
     function hideAllTodoExpansions() {
         const allExpanded = document.querySelectorAll(".expanded")
-
         for (let todo of allExpanded) {
             if (todo.parentNode.classList.contains('current-clicked')) continue;
-
             if (!todo.classList.contains("hidden")) {
                 todo.classList.add("hidden");
             }
         }
-
     }
-
-    // priortiy color; value of priority should determine color of A div, by use of function to add class to that div
-    // probably use switch function
-
-    // when clicking again, add the hidden class to description and remove class of expansion
+    function toggleExpandTodo(el) {
+        const bottom = el.querySelector(".expanded");
+        bottom.classList.contains('hidden') ? bottom.classList.remove('hidden'):bottom.classList.add('hidden');
+    }
 
     //when changing todo, send form input, send DOM index, then display matching todo
 

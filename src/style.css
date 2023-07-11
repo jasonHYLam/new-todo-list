@@ -17,6 +17,11 @@ body {
     height: 10vh;
 }
 
+#todoContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
 .todoDOM {
     cursor: pointer;
     min-height: 40px;
