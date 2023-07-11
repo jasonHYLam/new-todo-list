@@ -203,7 +203,7 @@ export function display() {
         e.preventDefault();
         if (e.target.classList.contains('delete')) {
             // publish the data index of the todo DOM, to project
-            pubSub.publish('getTodoToModify', e.target.parentNode.getAttribute('data-index'));
+            pubSub.publish('deleteTodo', e.target.closest('.todoDOM').getAttribute('data-index'));
         }
     })
 
@@ -214,9 +214,6 @@ export function display() {
             const todoDOM = (e.target.closest('.todoDOM'));
             toggleMainTodoContent(todoDOM);
             toggleFormInTodo(todoDOM);
-            // create a form where initial values are that of the todo DOM text
-            // and when clicking submit, send todo index to project.js to get corresponding todo, so that it can be modified
-            // then be sent the project so that it can be displayed again
         }
     })
 
@@ -247,7 +244,6 @@ export function display() {
             const form = todoDOM.querySelector('.formInTodo');
             resetForm(form);
         }
-
     })
 
     function resetForm(form) {

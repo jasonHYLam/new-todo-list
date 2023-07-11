@@ -37,11 +37,15 @@ export function project() {
         pubSub.publish('displaySelectedProject', matchingProject) //needed to set header and todo to particular project
     })
 
-    pubSub.subscribe('getTodoToModify', (todoIndex)=> {
+    pubSub.subscribe('deleteTodo', (todoIndex) => {
         // modifies in place, mutating the original array. this is what we want
+        matchingProject.todoArray.forEach((todo) => {
+            console.log(todo.todoNumber);
+        })
         matchingProject.todoArray.splice(
             matchingProject.todoArray.findIndex((item) => item.todoNumber == todoIndex), 1)
         // now display again
+        console.log(todoIndex)
         pubSub.publish('displaySelectedProject', matchingProject)
     })
 
@@ -53,13 +57,8 @@ export function project() {
         todoToChange.setProp('description', newDescription);
         todoToChange.setProp('priority', newPriority);
 
-        // matchingProject.todoArray.find((todo) => {todo.todoNumber == todoIndex}).setProp(title, newTitle);
-        // matchingProject.todoArray.find((todo) => {todo.todoNumber == todoIndex}).setProp(title, newTitle);
-        // matchingProject.todoArray.find((todo) => {todo.todoNumber == todoIndex}).setProp(title, newTitle);
-
         pubSub.publish('displaySelectedProject', matchingProject)
     })
-// /////////////////////////////////////
 
     const setMatchingProject = (project) => {
         matchingProject = project;
