@@ -46,28 +46,6 @@ export function display() {
         todoDOM.classList.add('todoDOM');
         todoDOM.setAttribute('data-index', todo.todoNumber);
 
-        // setPriorityClass(todo, todoDOM);
-
-        // const todoTop = createDOMProp('div',"","todoTop")
-
-        // const todoTopLeft = createDOMProp('div', "", "todoTopLeft");
-        // todoTop.appendChild(todoTopLeft)
-        // todoTopLeft.appendChild(createDOMProp('span', todo.title, 'title'));
-
-        // const todoTopRight = createDOMProp('div', "", "todoTopRight");
-        // todoTop.appendChild(todoTopRight)
-        // todoTopRight.appendChild(createDOMProp('span', todo.dueDate, 'dueDate'));
-        // todoTopRight.appendChild(createDOMProp('button', 'Change', 'change'));
-        // todoTopRight.appendChild(createDOMProp('button', 'Delete', 'delete'));
-    
-
-        // const expanded = createDOMProp('div',"","expanded")
-        // expanded.classList.add('hidden');
-        // expanded.appendChild(createDOMProp('span', todo.priority, 'priority'));
-        // expanded.appendChild(createDOMProp('span', todo.description, 'description'));
-
-        // todoDOM.appendChild(todoTop);
-        // todoDOM.appendChild(expanded);
         todoDOM.appendChild(createMainTodoContent(todo));
         todoDOM.appendChild(createFormInTodo());
         todoContainer.appendChild(todoDOM);
@@ -125,8 +103,8 @@ export function display() {
         title.setAttribute('placeholder', 'New title:')
         const description = createDOMProp('input', "", "formDescription");
         description.setAttribute('placeholder', 'New description:')
-        const date = createDOMProp('input', "", "formDate");
-        date.setAttribute('type', 'date');
+        // const date = createDOMProp('input', "", "formDate"); //new date input doesn't work
+        // date.setAttribute('type', 'date');
         const priority = createDOMProp('select', "", "formPriority");
         const submit = createDOMProp('button', "Make changes", "formSubmit");
         const cancel = createDOMProp('button', "Cancel", "formCancel");
@@ -142,7 +120,7 @@ export function display() {
 
         form.appendChild(title);
         form.appendChild(description);
-        form.appendChild(date);
+        // form.appendChild(date);
         form.appendChild(priority);
         form.appendChild(submit);
         form.appendChild(cancel);
@@ -241,6 +219,23 @@ export function display() {
             // then be sent the project so that it can be displayed again
         }
     })
+
+
+    // click on form submit
+    todoContainer.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (e.target.classList.contains('formSubmit')) {
+            const todoDOM = (e.target.closest('.todoDOM'));
+            pubSub.publish((getFormInput(todoDOM)));
+        }
+    })
+
+    function getFormInput(form) {
+        const newTodoTitle = form.querySelector(".formTitle").value;
+        const newTodoDescription = form.querySelector(".formDescription").value;
+        const newTodoPriority = form.querySelector(".formPriority").value;
+        return {newTodoTitle, newTodoDescription, newTodoPriority}
+    }
 
     // click on cancel button in form in todo
     todoContainer.addEventListener('click', (e) => {
