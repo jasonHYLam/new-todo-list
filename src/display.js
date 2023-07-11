@@ -41,6 +41,7 @@ export function display() {
 
     const createTodoDOM = (todo) => {
         const todoDOM = document.createElement('div');
+        setPriorityClass(todo,todoDOM);
         todoDOM.classList.add('todoDOM');
         todoDOM.setAttribute('data-index', todo.todoNumber);
 
@@ -53,7 +54,6 @@ export function display() {
 
         const todoMainContent = document.createElement('div');
         todoMainContent.classList.add('todoMainContent');
-        setPriorityClass(todo, todoMainContent);
         const todoTop = createDOMProp('div',"","todoTop")
 
         const todoTopLeft = createDOMProp('div', "", "todoTopLeft");
@@ -80,14 +80,17 @@ export function display() {
     }
 
     const setPriorityClass = (todo, todoDOM) => {
+        console.log('priority')
+        console.log(todo.priority)
+
         switch(todo.priority) {
-            case 'low':
+            case 'low priority':
                 todoDOM.classList.add('low-priority');
                 break;
-            case 'medium':
+            case 'medium priority':
                 todoDOM.classList.add('medium-priority');
                 break;
-            case 'high':
+            case 'high priority':
                 todoDOM.classList.add('high-priority');
                 break;
         }
