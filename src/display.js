@@ -144,12 +144,18 @@ export function display() {
         if (e.target.tagName == 'BUTTON') return;
         if (e.target.classList.contains('todoDOM')) {
             toggleExpandTodo(e.target);
+            toggleShowDescription();
         }
     })
 
     function toggleExpandTodo(el) {
         el.classList.contains('expanded')? el.classList.remove('expanded'): el.classList.add('expanded');
-        // if el has class of expand, then remove it, else add it
+    }
+
+    function toggleShowDescription(el) {
+        const description = el.querySelector(".description")
+        description.classList.contains('hidden')? description.classList.remove('hidden') : description.classList.add('hidden');
+
 
     }
     // show its description; maybe unhide it, by removing a hidden class
