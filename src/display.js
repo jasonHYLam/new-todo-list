@@ -157,7 +157,7 @@ export function display() {
         if (e.target.tagName == 'BUTTON') return;
         const todoDOM = (e.target.closest(".todoDOM"));
         if (todoDOM) {
-        console.log(todoDOM)
+            // hideAllTodoExpansions();
             toggleExpandTodo(todoDOM)
         }
     })
@@ -165,13 +165,17 @@ export function display() {
     function toggleExpandTodo(el) {
         const bottom = el.querySelector(".expanded");
         bottom.classList.contains('hidden') ? bottom.classList.remove('hidden'):bottom.classList.add('hidden');
-        el.classList.contains('clearfix') ? el.classList.remove('clearfix'): el.classList.add('clearfix');
     }
 
-    // function toggleShowDescription(el) {
-    //     const description = el.querySelector(".description")
-    //     description.classList.contains('hidden')? description.classList.remove('hidden') : description.classList.add('hidden');
+    function hideAllTodoExpansions() {
+        const allExpanded = document.querySelector(".expanded")
+        allExpanded.forEach((todo) => {
+            if (!todo.classList.contains("hidden")) {
+                todo.classList.add("hidden");
+            }
+        })
 
+    }
 
     // }
     // show its description; maybe unhide it, by removing a hidden class
