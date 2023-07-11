@@ -30,6 +30,11 @@ body {
     background-color: aliceblue;
 }
 
+.todoTop {
+    display: flex;
+    justify-content: space-between;
+}
+
 .title, .description, .dueDate {
     background-color: white;
 }
