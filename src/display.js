@@ -119,6 +119,8 @@ export function display() {
 
     const createFormInTodo = () => {
         const form = createDOMProp('form', "", 'formInTodo');
+        form.classList.add('hidden');
+
         const title = createDOMProp('input', "", "title");
         const description = createDOMProp('input', "", "description");
         const date = createDOMProp('input', "", "date");
