@@ -177,9 +177,13 @@ export function display() {
         }
     })
 
+    function setCurrentClicked(todoDOM) {
+        todoDOM.classList.add('current-clicked');
+    }
+
     function toggleExpandTodo(el) {
 
-            hideAllTodoExpansions();
+        hideAllTodoExpansions();
         const bottom = el.querySelector(".expanded");
         bottom.classList.contains('hidden') ? bottom.classList.remove('hidden'):bottom.classList.add('hidden');
     }
