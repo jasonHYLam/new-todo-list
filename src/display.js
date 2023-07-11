@@ -174,7 +174,7 @@ export function display() {
         if (e.target.tagName == 'BUTTON') return;
         const todoDOM = (e.target.closest(".todoDOM"));
         if (todoDOM) {
-            toggleExpandTodo(todoDOM)
+            toggleExpandTodoAndCloseOthers(todoDOM)
         }
     })
 
@@ -189,14 +189,18 @@ export function display() {
         }
     }
 
-
     function toggleExpandTodo(el) {
+        const bottom = el.querySelector(".expanded");
+        bottom.classList.contains('hidden') ? bottom.classList.remove('hidden'):bottom.classList.add('hidden');
+    }
+
+
+    function toggleExpandTodoAndCloseOthers(el) {
 
         removeCurrentClicked();
         setCurrentClicked(el);
         hideAllTodoExpansions();
-        const bottom = el.querySelector(".expanded");
-        bottom.classList.contains('hidden') ? bottom.classList.remove('hidden'):bottom.classList.add('hidden');
+        toggleExpandTodo(el);
     }
 
     function hideAllTodoExpansions() {
