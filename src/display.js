@@ -140,11 +140,18 @@ export function display() {
     // TODO 
     // when clicking on todo, expand it; add class that contains a larger height value
     todoContainer.addEventListener("click", (e) => {
-        console.log(e.target.classList);
+
+        if (e.target.tagName == 'BUTTON') return;
         if (e.target.classList.contains('todoDOM')) {
-            console.log('oh yea')
+            toggleExpandTodo();
         }
     })
+
+    function toggleExpandTodo(el) {
+        el.classList.contains('expanded')? el.classList.remove('expanded'): el.classList.add('expanded');
+        // if el has class of expand, then remove it, else add it
+
+    }
     // show its description; maybe unhide it, by removing a hidden class
 
     // priortiy color; value of priority should determine color of A div, by use of function to add class to that div
