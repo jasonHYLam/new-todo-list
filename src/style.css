@@ -24,7 +24,7 @@ body {
 }
 .todoDOM {
     cursor: pointer;
-    min-height: 40px;
+    min-height: 80px;
     box-shadow: 0px 1px 1px black;
     overflow: auto;
     background-color: aliceblue;
@@ -36,7 +36,7 @@ body {
 
 .expanded {
     padding: 10px 10px 0px;
-    height: 40px;
+    height: 100px;
     float:top;
 }
 .expanded.hidden {
