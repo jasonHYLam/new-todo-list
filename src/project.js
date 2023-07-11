@@ -25,7 +25,6 @@ export function project() {
         addTodoToProjectArray(matchingProject, todo)
         // pubSub to display the todos; send to display.js
         pubSub.publish('displaySelectedProject', matchingProject)
-        console.log(projectArray);
     });
 
     // subscribe to when projectform is submitted
@@ -42,11 +41,25 @@ export function project() {
         // modifies in place, mutating the original array. this is what we want
         matchingProject.todoArray.splice(
             matchingProject.todoArray.findIndex((item) => item.todoNumber == todoIndex), 1)
-
         // now display again
         pubSub.publish('displaySelectedProject', matchingProject)
     })
 
+    // modify todo when the form for it is submitted
+    pubSub.subscribe('submitChangedTodo', ([todoIndex, {newTitle, newDescription, newPriority}]) => {
+        let todoToChange = matchingProject.todoArray.find((todo) => {return todo.todoNumber == todoIndex});
+        console.log(todoToChange);
+        todoToChange.setProp('title', newTitle);
+        todoToChange.setProp('description', newDescription);
+        todoToChange.setProp('priority', newPriority);
+
+        // matchingProject.todoArray.find((todo) => {todo.todoNumber == todoIndex}).setProp(title, newTitle);
+        // matchingProject.todoArray.find((todo) => {todo.todoNumber == todoIndex}).setProp(title, newTitle);
+        // matchingProject.todoArray.find((todo) => {todo.todoNumber == todoIndex}).setProp(title, newTitle);
+
+        pubSub.publish('displaySelectedProject', matchingProject)
+    })
+// /////////////////////////////////////
 
     const setMatchingProject = (project) => {
         matchingProject = project;
@@ -59,33 +72,11 @@ export function project() {
         projectArray.push(project)
     }
 
-    const getArray = () => projectArray;
-
-
     class Project {
         constructor(name) {
             this.todoArray = [];
             this.name = name;
             increaseProjects(this);
-        }
-
-        // USED
-        addToDo(todo) {
-            this.todoArray.push(todo)
-        }
-        // NOT USED
-        removeToDo(todo) {
-            this.todoArray.filter(el => el != todo);
-        }
-
-        // NOT USED AND DEVELOP
-        changeToDo(todo) {
-
-        }
-
-        // NOT USED AND DEVELOP
-        changeName(name) {
-            this.name = name;
         }
     }
 

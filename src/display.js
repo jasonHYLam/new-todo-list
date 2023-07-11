@@ -226,15 +226,16 @@ export function display() {
         e.preventDefault();
         if (e.target.classList.contains('formSubmit')) {
             const todoDOM = (e.target.closest('.todoDOM'));
-            pubSub.publish((getFormInput(todoDOM)));
+            console.log(getFormInput(todoDOM))
+            pubSub.publish('submitChangedTodo', [todoDOM.getAttribute('data-index'), getFormInput(todoDOM)]);
         }
     })
 
     function getFormInput(form) {
-        const newTodoTitle = form.querySelector(".formTitle").value;
-        const newTodoDescription = form.querySelector(".formDescription").value;
-        const newTodoPriority = form.querySelector(".formPriority").value;
-        return {newTodoTitle, newTodoDescription, newTodoPriority}
+        const newTitle = form.querySelector(".formTitle").value;
+        const newDescription = form.querySelector(".formDescription").value;
+        const newPriority = form.querySelector(".formPriority").value;
+        return {newTitle, newDescription, newPriority}
     }
 
     // click on cancel button in form in todo
