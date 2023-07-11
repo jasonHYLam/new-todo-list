@@ -46,7 +46,17 @@ body {
 }
 
 #add-todo-text {
-    font-size: 30px;
+    font-size: 20px;
+}
+
+#todoForm input, #todoForm select, #todoForm button,
+.formInTodo input, .formInTodo select, .formInTodo button {
+    margin-right: 20px;
+    height: 30px;
+}
+
+.formInTodo {
+    padding-top: 20px;
 }
 
 
