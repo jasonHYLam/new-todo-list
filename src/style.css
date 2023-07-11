@@ -24,15 +24,15 @@ body {
     min-height: 40px;
     /* padding: 20px 5px 20px; */
     box-shadow: 0px 1px 1px black;
-    background-color: red;
 }
 
 .clearfix {
     overflow: auto;
 }
 .expanded {
+    padding: 10px 10px 0px;
     height: 40px;
-    box-shadow: 0px 1px 1px black;
+    /* box-shadow: 0px 1px 1px black; */
     float:top;
 }
 .expanded.hidden {
