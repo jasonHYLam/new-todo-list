@@ -21,7 +21,9 @@ body {
 }
 
 #header {
-    height: 10vh;
+    height: 5vh;
+    padding: 20px 10px 20px;
+    font-size: 40px;
 }
 
 #todoForm {

@@ -3,8 +3,6 @@ import { todo } from "./todo";
 
 // should handle DOM related functionality. Such as creating, changing and deleting DOM elements.
 export function display() {
-    
-
 
     // display project array on first load
     pubSub.subscribe('loadInitialOptions', displayAllProjectOptions);
@@ -217,13 +215,11 @@ export function display() {
         }
     })
 
-
     // click on form submit
     todoContainer.addEventListener("click", (e) => {
         e.preventDefault();
         if (e.target.classList.contains('formSubmit')) {
             const todoDOM = (e.target.closest('.todoDOM'));
-            console.log(getFormInput(todoDOM))
             pubSub.publish('submitChangedTodo', [todoDOM.getAttribute('data-index'), getFormInput(todoDOM)]);
         }
     })
@@ -306,8 +302,4 @@ export function display() {
     function toggleHidden(el) {
         el.classList.contains('hidden') ? el.classList.remove('hidden'): el.classList.add('hidden');
     }
-
-    //when changing todo, send form input, send DOM index, then display matching todo
-    
-
 }
