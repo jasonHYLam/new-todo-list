@@ -32,6 +32,7 @@ export function display() {
         const todoProp = document.createElement(elType);
         todoProp.textContent = value;
         todoProp.classList.add(className);
+        // hide description class by default
         if (className == 'description') {
             todoProp.classList.add('hidden');
         }
@@ -147,7 +148,7 @@ export function display() {
         if (e.target.tagName == 'BUTTON') return;
         if (e.target.classList.contains('todoDOM')) {
             toggleExpandTodo(e.target);
-            toggleShowDescription();
+            toggleShowDescription(e.target);
         }
     })
 
@@ -156,7 +157,9 @@ export function display() {
     }
 
     function toggleShowDescription(el) {
+        console.log(el);
         const description = el.querySelector(".description")
+        console.log(description);
         description.classList.contains('hidden')? description.classList.remove('hidden') : description.classList.add('hidden');
 
 
