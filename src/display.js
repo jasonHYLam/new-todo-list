@@ -164,8 +164,8 @@ export function display() {
 
     function toggleExpandTodo(el) {
         const bottom = el.querySelector(".expanded");
-        console.log(bottom);
         bottom.classList.contains('hidden') ? bottom.classList.remove('hidden'):bottom.classList.add('hidden');
+        el.classList.contains('clearfix') ? el.classList.remove('clearfix'): el.classList.add('clearfix');
     }
 
     // function toggleShowDescription(el) {

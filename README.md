@@ -7,3 +7,4 @@
 - Use of .gitignore.
 - Create multiple instances of Node elements rather than assign the same instance multiple times.
 - Importance of indexes (as data attributes or values if select option)to match DOM elements to objects.
+- Use of closest() method to target specific parent node, useful when clicking a node that has children nodes.
