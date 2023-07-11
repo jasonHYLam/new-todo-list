@@ -45,6 +45,11 @@ body {
 
 .title, .description, .dueDate {
     background-color: white;
+    padding: 5px;
+}
+
+.title {
+    font-size: 25px;
 }
 
 .expanded {
