@@ -39,9 +39,14 @@ export function display() {
         return todoProp;
     }
 
+
     const createTodoDOM = (todo) => {
         const todoDOM = document.createElement('div');
         todoDOM.classList.add('todoDOM');
+        const top = createDOMProp('div',"","todoTop")
+        const bottom = createDOMProp('div',"","todoBottom")
+        todoDOM.appendChild(top);
+        todoDOM.appendChild(bottom);
         todoDOM.setAttribute('data-index', todo.todoNumber);
         todoDOM.appendChild(createDOMProp('span', todo.title, 'title'));
         todoDOM.appendChild(createDOMProp('span', todo.description, 'description'));
@@ -157,9 +162,7 @@ export function display() {
     }
 
     function toggleShowDescription(el) {
-        console.log(el);
         const description = el.querySelector(".description")
-        console.log(description);
         description.classList.contains('hidden')? description.classList.remove('hidden') : description.classList.add('hidden');
 
 
