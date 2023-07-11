@@ -126,7 +126,8 @@ export function display() {
         const date = createDOMProp('input', "", "formDate");
         date.setAttribute('type', 'date');
         const priority = createDOMProp('select', "", "formPriority");
-        const submit = createDOMProp('button', "", "formButton");
+        const submit = createDOMProp('button', "Make changes", "formSubmit");
+        const cancel = createDOMProp('button', "Cancel", "formCancel");
 
         const lowPriority = createDOMProp('option', 'Not urgent', 'low')
         priority.appendChild(lowPriority)
@@ -142,6 +143,7 @@ export function display() {
         form.appendChild(date);
         form.appendChild(priority);
         form.appendChild(submit);
+        form.appendChild(cancel);
 
         return form;
     }
