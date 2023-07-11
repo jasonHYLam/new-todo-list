@@ -122,7 +122,9 @@ export function display() {
         form.classList.add('hidden');
 
         const title = createDOMProp('input', "", "formTitle");
+        title.setAttribute('placeholder', 'New title:')
         const description = createDOMProp('input', "", "formDescription");
+        description.setAttribute('placeholder', 'New description:')
         const date = createDOMProp('input', "", "formDate");
         date.setAttribute('type', 'date');
         const priority = createDOMProp('select', "", "formPriority");

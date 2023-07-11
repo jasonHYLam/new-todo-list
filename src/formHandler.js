@@ -14,7 +14,7 @@ export function formHandler() {
     const todoTitle = document.querySelector("#todoTitle").value;
     const todoDescription = document.querySelector("#todoDescription").value;
     const todoDueDate = document.querySelector("#dueDate").value;
-    const todoPriority = document.querySelector("#todoPriority").value;
+    const todoPriority = `${document.querySelector("#todoPriority").value} priority`;//change from value to textContent
     const todoArgs = [todoTitle, todoDescription, todoDueDate, todoPriority]
     return todoArgs;
     }
@@ -39,7 +39,6 @@ export function formHandler() {
         e.preventDefault();
         // pubSub for creating a new project
         pubSub.publish('projectFormSubmitted', document.querySelector('#projectForm input').value)
-        console.log(document.querySelector('#projectForm input').value)
         resetForm(projectForm);
     })
 }
