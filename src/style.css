@@ -1,3 +1,6 @@
+:root {
+    --bottom-shadow: 0px 1px black;
+}
 body {
     height: 100vh;
     margin: 0;
@@ -13,8 +16,17 @@ body {
     background-color: blueviolet;
 }
 
+#right {
+    flex: 1;
+}
+
 #header {
     height: 10vh;
+}
+
+#todoForm {
+    padding-bottom: 30px;
+    box-shadow: var(--bottom-shadow);
 }
 
 #todoContainer {
@@ -25,7 +37,7 @@ body {
 .todoDOM {
     cursor: pointer;
     min-height: 80px;
-    box-shadow: 0px 1px 1px black;
+    box-shadow: var(--bottom-shadow);
     overflow: auto;
     background-color: aliceblue;
     padding-right: 20px;
