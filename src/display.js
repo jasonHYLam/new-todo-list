@@ -229,14 +229,22 @@ export function display() {
     todoContainer.addEventListener("click", (e) => {
         e.preventDefault();
         if (e.target.classList.contains('change')) {
+            console.log(e.target.closest('.todoDOM'));
+            toggleMainTodoContent();
+            toggleFormInTodo();
             // create a form where initial values are that of the todo DOM text
             // and when clicking submit, send todo index to project.js to get corresponding todo, so that it can be modified
             // then be sent the project so that it can be displayed again
         }
     })
 
+    function toggleMainTodoContent() {
+
+
+    }
+
     // TODO 
-    // when clicking on todo, expand it; add class that contains a larger height value
+    // when clicking on todo, expand it and hide other expanded todos.
     todoContainer.addEventListener("click", (e) => {
 
         if (e.target.tagName == 'BUTTON') return;
@@ -253,10 +261,6 @@ export function display() {
         toggleExpandTodo(el);
     }
 
-    function setCurrentClicked(todoDOM) {
-        todoDOM.classList.add('current-clicked');
-    }
-
     function removeCurrentClicked() {
         const currentClicked = document.querySelector('.current-clicked')
         if (currentClicked) {
@@ -264,10 +268,14 @@ export function display() {
         }
     }
 
+    function setCurrentClicked(todoDOM) {
+        todoDOM.classList.add('current-clicked');
+    }
+
     function hideAllTodoExpansions() {
         const allExpanded = document.querySelectorAll(".expanded")
         for (let todo of allExpanded) {
-            if (todo.parentNode.classList.contains('current-clicked')) continue;
+            if (todo.closest(".todoDOM").classList.contains('current-clicked')) continue;
             if (!todo.classList.contains("hidden")) {
                 todo.classList.add("hidden");
             }
@@ -275,9 +283,15 @@ export function display() {
     }
     function toggleExpandTodo(el) {
         const bottom = el.querySelector(".expanded");
-        bottom.classList.contains('hidden') ? bottom.classList.remove('hidden'):bottom.classList.add('hidden');
+        toggleHidden(bottom);
+        // bottom.classList.contains('hidden') ? bottom.classList.remove('hidden'):bottom.classList.add('hidden');
+    }
+
+    function toggleHidden(el) {
+        el.classList.contains('hidden') ? el.classList.remove('hidden'): el.classList.add('hidden');
     }
 
     //when changing todo, send form input, send DOM index, then display matching todo
+    
 
 }
