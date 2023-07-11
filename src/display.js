@@ -48,10 +48,14 @@ export function display() {
         setPriorityClass(todo, todoDOM);
 
         const todoTop = createDOMProp('div',"","todoTop")
-        todoTop.appendChild(createDOMProp('span', todo.title, 'title'));
-        todoTop.appendChild(createDOMProp('span', todo.dueDate, 'dueDate'));
-        todoTop.appendChild(createDOMProp('button', 'Change', 'change'));
-        todoTop.appendChild(createDOMProp('button', 'Delete', 'delete'));
+
+        const todoTopLeft = createDOMProp('div', "", "todoTopLeft");
+        todoTopLeft.appendChild(createDOMProp('span', todo.title, 'title'));
+
+        const todoTopRight = createDOMProp('div', "", "todoTopLeft");
+        todoTopRight.appendChild(createDOMProp('span', todo.dueDate, 'dueDate'));
+        todoTopRight.appendChild(createDOMProp('button', 'Change', 'change'));
+        todoTopRight.appendChild(createDOMProp('button', 'Delete', 'delete'));
     
 
         const expanded = createDOMProp('div',"","expanded")
