@@ -28,9 +28,6 @@ body {
 
 }
 
-.clearfix {
-    overflow: auto;
-}
 .expanded {
     padding: 10px 10px 0px;
     height: 40px;
@@ -42,4 +39,15 @@ body {
 
 .description.hidden {
     display: none;
+}
+
+.low-priority {
+    border-left: palegoldenrod solid 15px;
+}
+
+.medium-priority {
+    border-left: orange solid 15px;
+}
+.high-priority {
+    border-left: red solid 15px;
 }
