@@ -1,4 +1,5 @@
 import { pubSub } from "./pubsub";
+import { todo } from "./todo";
 
 // should handle DOM related functionality. Such as creating, changing and deleting DOM elements.
 export function display() {
@@ -180,6 +181,14 @@ export function display() {
     function setCurrentClicked(todoDOM) {
         todoDOM.classList.add('current-clicked');
     }
+
+    function removeCurrentClicked() {
+        const currentClicked = document.querySelector('.current-clicked')
+        if (currentClicked) {
+            todoDOM.classList.remove('current-clicked');
+        }
+    }
+
 
     function toggleExpandTodo(el) {
 
