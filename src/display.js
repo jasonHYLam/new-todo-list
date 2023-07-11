@@ -43,15 +43,15 @@ export function display() {
     const createTodoDOM = (todo) => {
         const todoDOM = document.createElement('div');
         todoDOM.classList.add('todoDOM');
+        todoDOM.setAttribute('data-index', todo.todoNumber);
         const top = createDOMProp('div',"","todoTop")
         const bottom = createDOMProp('div',"","todoBottom")
         todoDOM.appendChild(top);
         todoDOM.appendChild(bottom);
-        todoDOM.setAttribute('data-index', todo.todoNumber);
-        todoDOM.appendChild(createDOMProp('span', todo.title, 'title'));
-        todoDOM.appendChild(createDOMProp('span', todo.description, 'description'));
-        todoDOM.appendChild(createDOMProp('span', todo.dueDate, 'dueDate'));
-        todoDOM.appendChild(createDOMProp('span', todo.priority, 'priority'));
+        top.appendChild(createDOMProp('span', todo.title, 'title'));
+        top.appendChild(createDOMProp('span', todo.dueDate, 'dueDate'));
+        top.appendChild(createDOMProp('span', todo.priority, 'priority'));
+        bottom.appendChild(createDOMProp('span', todo.description, 'description'));
         todoDOM.appendChild(createDOMProp('button', 'Change', 'change'));
         todoDOM.appendChild(createDOMProp('button', 'Delete', 'delete'));
         todoContainer.appendChild(todoDOM);
