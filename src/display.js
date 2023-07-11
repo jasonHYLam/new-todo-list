@@ -246,9 +246,15 @@ export function display() {
             const todoDOM = (e.target.closest('.todoDOM'));
             toggleMainTodoContent(todoDOM);
             toggleFormInTodo(todoDOM);
+            const form = todoDOM.querySelector('.formInTodo');
+            resetForm(form);
         }
 
     })
+
+    function resetForm(form) {
+        form.reset();
+    }
 
     function toggleMainTodoContent(el) {
         const main = el.querySelector('.todoMainContent');
