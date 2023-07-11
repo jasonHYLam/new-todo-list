@@ -240,6 +240,16 @@ export function display() {
         }
     })
 
+    // click on cancel button in form in todo
+    todoContainer.addEventListener('click', (e) => {
+        if (e.target.classList.contains('formCancel')) {
+            const todoDOM = (e.target.closest('.todoDOM'));
+            toggleMainTodoContent(todoDOM);
+            toggleFormInTodo(todoDOM);
+        }
+
+    })
+
     function toggleMainTodoContent(el) {
         const main = el.querySelector('.todoMainContent');
         toggleHidden(main);
