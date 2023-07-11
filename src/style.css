@@ -29,6 +29,7 @@ body {
     overflow: auto;
     background-color: aliceblue;
     padding-right: 20px;
+    padding-left: 20px;
 }
 
 .todoTop {
