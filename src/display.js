@@ -44,16 +44,20 @@ export function display() {
         const todoDOM = document.createElement('div');
         todoDOM.classList.add('todoDOM');
         todoDOM.setAttribute('data-index', todo.todoNumber);
+
         const top = createDOMProp('div',"","todoTop")
-        const bottom = createDOMProp('div',"","todoBottom")
-        todoDOM.appendChild(top);
-        todoDOM.appendChild(bottom);
         top.appendChild(createDOMProp('span', todo.title, 'title'));
         top.appendChild(createDOMProp('span', todo.dueDate, 'dueDate'));
-        top.appendChild(createDOMProp('span', todo.priority, 'priority'));
-        bottom.appendChild(createDOMProp('span', todo.description, 'description'));
-        todoDOM.appendChild(createDOMProp('button', 'Change', 'change'));
-        todoDOM.appendChild(createDOMProp('button', 'Delete', 'delete'));
+        top.appendChild(createDOMProp('button', 'Change', 'change'));
+        top.appendChild(createDOMProp('button', 'Delete', 'delete'));
+
+        const expanded = createDOMProp('div',"","todoBottom")
+        expanded.classList.add('hidden');
+        expanded.appendChild(createDOMProp('span', todo.priority, 'priority'));
+        expanded.appendChild(createDOMProp('span', todo.description, 'description'));
+
+        todoDOM.appendChild(top);
+        todoDOM.appendChild(expanded);
         todoContainer.appendChild(todoDOM);
     }
 
@@ -151,6 +155,7 @@ export function display() {
     todoContainer.addEventListener("click", (e) => {
 
         if (e.target.tagName == 'BUTTON') return;
+        // refactor so that bottom says expanded
         if (e.target.classList.contains('todoDOM')) {
             toggleExpandTodo(e.target);
             toggleShowDescription(e.target);
