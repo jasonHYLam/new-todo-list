@@ -143,7 +143,7 @@ export function display() {
 
         if (e.target.tagName == 'BUTTON') return;
         if (e.target.classList.contains('todoDOM')) {
-            toggleExpandTodo();
+            toggleExpandTodo(e.target);
         }
     })
 
