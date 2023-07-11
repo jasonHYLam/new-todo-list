@@ -7,8 +7,6 @@ body {
 #body {
     display: flex;
     flex: 1;
-
-
 }
 
 #left {
@@ -22,10 +20,13 @@ body {
 .todoDOM {
     cursor: pointer;
     min-height: 40px;
-    /* padding: 20px 5px 20px; */
     box-shadow: 0px 1px 1px black;
     overflow: auto;
+    background-color: aliceblue;
+}
 
+.title, .description, .dueDate {
+    background-color: white;
 }
 
 .expanded {
