@@ -185,13 +185,15 @@ export function display() {
     function removeCurrentClicked() {
         const currentClicked = document.querySelector('.current-clicked')
         if (currentClicked) {
-            todoDOM.classList.remove('current-clicked');
+            currentClicked.classList.remove('current-clicked');
         }
     }
 
 
     function toggleExpandTodo(el) {
 
+        removeCurrentClicked();
+        setCurrentClicked(el);
         hideAllTodoExpansions();
         const bottom = el.querySelector(".expanded");
         bottom.classList.contains('hidden') ? bottom.classList.remove('hidden'):bottom.classList.add('hidden');
@@ -201,7 +203,7 @@ export function display() {
         const allExpanded = document.querySelectorAll(".expanded")
 
         for (let todo of allExpanded) {
-            console.log(!todo.classList.contains('hidden'))
+            if (todo.parentNode.classList.contains('current-clicked')) continue;
 
             if (!todo.classList.contains("hidden")) {
                 todo.classList.add("hidden");
