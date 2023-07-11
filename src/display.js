@@ -121,12 +121,12 @@ export function display() {
         const form = createDOMProp('form', "", 'formInTodo');
         form.classList.add('hidden');
 
-        const title = createDOMProp('input', "", "title");
-        const description = createDOMProp('input', "", "description");
-        const date = createDOMProp('input', "", "date");
+        const title = createDOMProp('input', "", "formTitle");
+        const description = createDOMProp('input', "", "formDescription");
+        const date = createDOMProp('input', "", "formDate");
         date.setAttribute('type', 'date');
-        const priority = createDOMProp('select', "", "priority");
-        const submit = createDOMProp('button', "", "button");
+        const priority = createDOMProp('select', "", "formPriority");
+        const submit = createDOMProp('button', "", "formButton");
 
         const lowPriority = createDOMProp('option', 'Not urgent', 'low')
         priority.appendChild(lowPriority)
@@ -229,18 +229,23 @@ export function display() {
     todoContainer.addEventListener("click", (e) => {
         e.preventDefault();
         if (e.target.classList.contains('change')) {
-            console.log(e.target.closest('.todoDOM'));
-            toggleMainTodoContent();
-            toggleFormInTodo();
+            const todoDOM = (e.target.closest('.todoDOM'));
+            toggleMainTodoContent(todoDOM);
+            toggleFormInTodo(todoDOM);
             // create a form where initial values are that of the todo DOM text
             // and when clicking submit, send todo index to project.js to get corresponding todo, so that it can be modified
             // then be sent the project so that it can be displayed again
         }
     })
 
-    function toggleMainTodoContent() {
+    function toggleMainTodoContent(el) {
+        const main = el.querySelector('.todoMainContent');
+        toggleHidden(main);
+    }
 
-
+    function toggleFormInTodo(el) {
+        const form = el.querySelector('.formInTodo');
+        toggleHidden(form);
     }
 
     // TODO 
@@ -284,7 +289,6 @@ export function display() {
     function toggleExpandTodo(el) {
         const bottom = el.querySelector(".expanded");
         toggleHidden(bottom);
-        // bottom.classList.contains('hidden') ? bottom.classList.remove('hidden'):bottom.classList.add('hidden');
     }
 
     function toggleHidden(el) {
