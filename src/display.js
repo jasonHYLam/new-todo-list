@@ -27,6 +27,11 @@ export function display() {
         setProjectSelectOption(project);
     })
 
+    pubSub.subscribe('clearDeletedProjectContent', () => {
+        changeHeader('Deleted!');
+        resetTodoContainer();
+    })
+
 
     const todoContainer = document.querySelector("#todoContainer");
 

@@ -65,7 +65,17 @@ export function project() {
         deleteElement(projectArray, projectIndex);
         projectArray.forEach(item => console.log(item))
         pubSub.publish('projectDeleted', projectArray); //reset project options
-        pubSub.publish('displaySelectedProject', matchingProject) //needed to set header and todo to particular project
+        // if projectIndex == matching project, then clear everything
+        console.log('projIndex and matchingProj number')
+        console.log(projectIndex)
+        console.log(matchingProject.number)
+
+        if (projectIndex == matchingProject.number) {
+            pubSub.publish('clearDeletedProjectContent')
+        } else {
+            pubSub.publish('displaySelectedProject', matchingProject) //needed to set header and todo to particular project
+        }
+        // pubSub.publish('displaySelectedProject', matchingProject) //needed to set header and todo to particular project
     })
 
     // 
