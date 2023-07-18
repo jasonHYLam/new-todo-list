@@ -4,10 +4,10 @@ export function project() {
 
 
     let projectArray = [];
-    console.log(
-    localStorage.projectArray
 
-    )
+    if (localStorage.projectArray) {
+
+    }
     //check if there is local storage
     //if local storage.projectArray is empty, don't do anything
     // if (localStorage.projectArray = []) {return}
@@ -38,6 +38,8 @@ export function project() {
         addTodoToProjectArray(matchingProject, todo)
         // pubSub to display the todos; send to display.js
         pubSub.publish('displaySelectedProject', matchingProject)
+        // when making anychange, upload to local storage
+        pushToLocalStorage();
     });
 
     // subscribe to when projectform is submitted
@@ -48,6 +50,7 @@ export function project() {
         // when a new project is created
         pubSub.publish('projectAdded', projectArray); //needed to display all project options
         pubSub.publish('displaySelectedProject', matchingProject) //needed to set header and todo to particular project
+        pushToLocalStorage();
     })
 
     pubSub.subscribe('deleteTodo', (todoIndex) => {
@@ -58,8 +61,8 @@ export function project() {
         matchingProject.todoArray.splice(
             matchingProject.todoArray.findIndex((item) => item.todoNumber == todoIndex), 1)
         // now display again
-        console.log(todoIndex)
         pubSub.publish('displaySelectedProject', matchingProject)
+        pushToLocalStorage();
     })
 
     // modify todo when the form for it is submitted
@@ -71,6 +74,7 @@ export function project() {
         todoToChange.setProp('priority', newPriority);
 
         pubSub.publish('displaySelectedProject', matchingProject)
+        pushToLocalStorage();
     })
 
     const setMatchingProject = (project) => {
@@ -80,8 +84,19 @@ export function project() {
         project.todoArray.push(todo)
     }
 
+
     const increaseProjects = (project) => {
         projectArray.push(project)
+    }
+
+    // when making any change to project, assign project Array to local Storage
+    const pushToLocalStorage = () => {
+        console.log(projectArray)
+
+        localStorage.projectArray = JSON.stringify(projectArray)
+        console.log(localStorage.projectArray);
+        let test = localStorage.projectArray;
+        console.log(test)
     }
 
     class Project {
@@ -89,16 +104,15 @@ export function project() {
             this.todoArray = [];
             this.name = name;
             increaseProjects(this);
-            // 
-            localStorage.projectArray.push(this)
-            console.log(localStorage.projectArray)
-            // 
         }
     }
 
     // this should create a project and add it to projectArray. is this clean code?
+    // may need to modify this... 
 
     const pageLoad = () => {
+        console.log(localStorage.projectArray);
+        console.log(localStorage);
         let testProject = new Project('My First Project!');
         // added this below
         setMatchingProject(testProject);
