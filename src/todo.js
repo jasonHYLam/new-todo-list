@@ -38,6 +38,18 @@ function todo() {
             this[prop] = value;
         } 
     }
+    const pushToLocalStorage = () => {
+        localStorage.todoCounter = JSON.stringify(todoCounter);
+    }
+
+    const pageLoad = () => {
+        if (localStorage.todoCounter == 'undefined') {
+            return;
+        } else {
+            todoCounter = JSON.parse(localStorage.todoCounter);
+        }
+    }
+    pageLoad();
 }
 
 export {todo};

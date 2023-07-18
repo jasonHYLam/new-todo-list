@@ -4,6 +4,11 @@ import { pubSub } from "./pubsub";
 export function project() {
 
     let projectCounter = 0;
+    if (localStorage.projectCounter == 'undefined') {
+        return
+    } else {
+        projectCounter = localStorage.projectCounter;
+    }
 
     class Project {
         constructor(name) {
@@ -46,7 +51,7 @@ export function project() {
         // pubSub to display the todos; send to display.js
         pubSub.publish('displaySelectedProject', matchingProject)
         // when making anychange, upload to local storage
-        // pushToLocalStorage();
+        pushToLocalStorage();
     });
 
     // subscribe to when projectform is submitted
@@ -57,7 +62,7 @@ export function project() {
         // when a new project is created
         pubSub.publish('projectAdded', projectArray); //needed to display all project options
         pubSub.publish('displaySelectedProject', matchingProject) //needed to set header and todo to particular project
-        // pushToLocalStorage();
+        pushToLocalStorage();
     })
 
     pubSub.subscribe('getProjectToDelete', (projectIndex) => {
@@ -65,21 +70,14 @@ export function project() {
         deleteElement(projectArray, projectIndex);
         projectArray.forEach(item => console.log(item))
         pubSub.publish('projectDeleted', projectArray); //reset project options
-        // if projectIndex == matching project, then clear everything
-        console.log('projIndex and matchingProj number')
-        console.log(projectIndex)
-        console.log(matchingProject.number)
 
+        // if projectIndex == matching project, then clear everything
         if (projectIndex == matchingProject.number) {
             pubSub.publish('clearDeletedProjectContent')
         } else {
             pubSub.publish('displaySelectedProject', matchingProject) //needed to set header and todo to particular project
         }
-        // pubSub.publish('displaySelectedProject', matchingProject) //needed to set header and todo to particular project
     })
-
-    // 
-
 
     pubSub.subscribe('deleteTodo', (todoIndex) => {
         // modifies in place, mutating the original array. this is what we want
@@ -89,7 +87,7 @@ export function project() {
         deleteElement(matchingProject.todoArray, todoIndex)
         // now display again
         pubSub.publish('displaySelectedProject', matchingProject)
-        // pushToLocalStorage();
+        pushToLocalStorage();
     })
 
     // modify todo when the form for it is submitted
@@ -122,26 +120,22 @@ export function project() {
 
     // when making any change to project, assign project Array to local Storage
     const pushToLocalStorage = () => {
-        console.log(projectArray)
-
-        localStorage.projectArray = JSON.stringify(projectArray)
-        console.log(localStorage.projectArray);
-        let test = JSON.parse(localStorage.projectArray);
-        console.log(test)
+        localStorage.projectArray = JSON.stringify(projectArray);
+        localStorage.projectCounter = JSON.stringify(projectCounter);
     }
 
     const pageLoad = () => {
         //clear storage
-        localStorage.clear();
-        console.log(localStorage.projectArray);
-        console.log(localStorage);
-        let testProject = new Project('My First Project!');
-        // added this below
-        setMatchingProject(testProject);
-        pubSub.publish('loadInitialOptions', projectArray);
-
-        // added this below
-        pubSub.publish('loadInitialProject', matchingProject);
+        // localStorage.clear();
+        if (localStorage.projectArray == 'undefined') {
+            let testProject = new Project('My First Project!');
+            setMatchingProject(testProject);
+            pubSub.publish('loadInitialOptions', projectArray);
+            pubSub.publish('loadInitialProject', matchingProject);
+        } else {
+            projectArray = JSON.parse(localStorage.projectArray);
+            pubSub.publish('loadInitialOptions', projectArray);
+        }
     }
 
     // create new project on first load
