@@ -145,8 +145,7 @@ export function display() {
     const createOptionElement = (project) => {
         const option = document.createElement('option');
         option.textContent = project.name;
-        option.value = project.name;
-        option.setAttribute("data-index", project.projectNumber);
+        option.value = project.projectNumber;
         return option;
     }
 
