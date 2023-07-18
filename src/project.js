@@ -3,6 +3,18 @@ import { pubSub } from "./pubsub";
 export function project() {
 
     let projectCounter = 0;
+
+    class Project {
+        constructor(name) {
+            this.todoArray = [];
+            this.name = name;
+            this.number = projectCounter;
+            increaseProjects(this);
+            incrementCounter();
+            console.log(this.number);
+        }
+    }
+
     const incrementCounter = () => {
         projectCounter++
     }
@@ -12,33 +24,25 @@ export function project() {
     if (localStorage.projectArray) {
 
     }
-    //check if there is local storage
-    //if local storage.projectArray is empty, don't do anything
-    // if (localStorage.projectArray = []) {return}
-    // else {projectArray = localStorage.projectArray};
-
-    
-    // when a change is made, asssign current projectArray to localStorage
-    // localStorage;
-    // let projectArray = [];
 
     let matchingProject = {};
     //getProject and sendTodoToProjectTodoArray occur consecutively
     // get project from todo form; first get matching project, then wait for todo to be added to the project
-    pubSub.subscribe('getProjectFromTodoForm',(projectMatch) => {
-        const selectedProject = projectArray.find((project) => {return project.name == projectMatch})
+    pubSub.subscribe('getProjectFromTodoForm',(projectIndex) => {
+        const selectedProject = projectArray.find((project) => {return project.number == projectIndex})
         setMatchingProject(selectedProject);
     });
 
     //get project from project select; immediately publish to display array
-    pubSub.subscribe('getProjectFromProjectSelect',(projectMatch) => {
-        const selectedProject = projectArray.find((project) => {return project.name == projectMatch})
+    pubSub.subscribe('getProjectFromProjectSelect',(projectIndex) => {
+        const selectedProject = projectArray.find((project) => {return project.number == projectIndex})
         setMatchingProject(selectedProject);
         pubSub.publish('displaySelectedProject', matchingProject)
     });
 
     //add todo to project todoArray
     pubSub.subscribe('sendTodoToProjectTodoArray', (todo) => {
+        console.log(matchingProject);
         addTodoToProjectArray(matchingProject, todo)
         // pubSub to display the todos; send to display.js
         pubSub.publish('displaySelectedProject', matchingProject)
@@ -57,13 +61,19 @@ export function project() {
         // pushToLocalStorage();
     })
 
+    pubSub.subscribe('getProjectToDelete', (projectIndex) => {
+        const projectToDelete = projectArray.find((project) => {return project.number == projectIndex})
+        projectArray
+    })
+
     pubSub.subscribe('deleteTodo', (todoIndex) => {
         // modifies in place, mutating the original array. this is what we want
         matchingProject.todoArray.forEach((todo) => {
-            console.log(todo.todoNumber);
+            console.log(todo.number);
         })
         matchingProject.todoArray.splice(
-            matchingProject.todoArray.findIndex((item) => item.todoNumber == todoIndex), 1)
+            matchingProject.todoArray.findIndex((item) => item.number == todoIndex), 1)
+        // deleteElement(matchingProject.todoArray, todoIndex)
         // now display again
         pubSub.publish('displaySelectedProject', matchingProject)
         // pushToLocalStorage();
@@ -71,7 +81,7 @@ export function project() {
 
     // modify todo when the form for it is submitted
     pubSub.subscribe('submitChangedTodo', ([todoIndex, {newTitle, newDescription, newPriority}]) => {
-        let todoToChange = matchingProject.todoArray.find((todo) => {return todo.todoNumber == todoIndex});
+        let todoToChange = matchingProject.todoArray.find((todo) => {return todo.number == todoIndex});
         console.log(todoToChange);
         todoToChange.setProp('title', newTitle);
         todoToChange.setProp('description', newDescription);
@@ -83,9 +93,16 @@ export function project() {
 
     const setMatchingProject = (project) => {
         matchingProject = project;
+        console.log(project);
+        console.log(matchingProject);
     }
     const addTodoToProjectArray = (project, todo) => {
         project.todoArray.push(todo)
+    }
+
+    const deleteElement = (array, index) => {
+        array.splice(
+            array.findIndex((item) => item.number = index),1)
     }
 
 
@@ -101,16 +118,6 @@ export function project() {
         console.log(localStorage.projectArray);
         let test = JSON.parse(localStorage.projectArray);
         console.log(test)
-    }
-
-    class Project {
-        constructor(name) {
-            this.todoArray = [];
-            this.name = name;
-            this.projectNumber = projectCounter;
-            increaseProjects(this);
-            incrementCounter();
-        }
     }
 
     const pageLoad = () => {

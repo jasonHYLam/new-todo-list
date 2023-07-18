@@ -79,9 +79,6 @@ export function display() {
     }
 
     const setPriorityClass = (todo, todoDOM) => {
-        console.log('priority')
-        console.log(todo.priority)
-
         switch(todo.priority) {
             case 'low priority':
                 todoDOM.classList.add('low-priority');
@@ -145,7 +142,7 @@ export function display() {
     const createOptionElement = (project) => {
         const option = document.createElement('option');
         option.textContent = project.name;
-        option.value = project.projectNumber;
+        option.value = project.number;
         return option;
     }
 
@@ -180,7 +177,7 @@ export function display() {
         }
     }
 
-    function getSelectedProject() {
+    function getSelectedProjectIndex() {
         return projectSelect.value
 
     }
@@ -188,10 +185,13 @@ export function display() {
     // when clicking on choose project
     const chooseProject = document.querySelector('#chooseProject');
     chooseProject.addEventListener("click", () => {
-        pubSub.publish("getProjectFromProjectSelect", getSelectedProject())
+        pubSub.publish("getProjectFromProjectSelect", getSelectedProjectIndex())
     })
 
     const deleteProject = document.querySelector('#deleteProject');
+    deleteProject.addEventListener("click", () => {
+        pubSub.publish("getProjectToDelete", getSelectedProjectIndex());
+    })
 
 
     const header = document.querySelector("#project-header");

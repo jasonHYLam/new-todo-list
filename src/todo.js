@@ -27,7 +27,7 @@ function todo() {
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
-        this.todoNumber = todoCounter;
+        this.number = todoCounter;
         incrementCounter();
 
         // may have to move this elsewhere, but when new todo is created, append it to a project todoArray
