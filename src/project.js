@@ -95,7 +95,7 @@ export function project() {
 
         localStorage.projectArray = JSON.stringify(projectArray)
         console.log(localStorage.projectArray);
-        let test = localStorage.projectArray;
+        let test = JSON.parse(localStorage.projectArray);
         console.log(test)
     }
 
