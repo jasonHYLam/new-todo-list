@@ -146,6 +146,7 @@ export function display() {
         const option = document.createElement('option');
         option.textContent = project.name;
         option.value = project.name;
+        option.setAttribute("data-index", project.projectNumber);
         return option;
     }
 
@@ -277,6 +278,7 @@ export function display() {
         hideAllTodoExpansions();
         toggleExpandTodo(el);
     }
+
 
     function removeCurrentClicked() {
         const currentClicked = document.querySelector('.current-clicked')

@@ -2,6 +2,10 @@ import { pubSub } from "./pubsub";
 
 export function project() {
 
+    let projectCounter = 0;
+    const incrementCounter = () => {
+        projectCounter++
+    }
 
     let projectArray = [];
 
@@ -21,8 +25,8 @@ export function project() {
     let matchingProject = {};
     //getProject and sendTodoToProjectTodoArray occur consecutively
     // get project from todo form; first get matching project, then wait for todo to be added to the project
-    pubSub.subscribe('getProjectFromTodoForm',(projectMatch) => {//dunno what to call projectMatch; the thing that i pass to find the correct project
-        const selectedProject = projectArray.find((project) => {return project.name == projectMatch})//also, may need to use data attribute, rather than name. or use form vaolidation to not use same name
+    pubSub.subscribe('getProjectFromTodoForm',(projectMatch) => {
+        const selectedProject = projectArray.find((project) => {return project.name == projectMatch})
         setMatchingProject(selectedProject);
     });
 
@@ -103,12 +107,11 @@ export function project() {
         constructor(name) {
             this.todoArray = [];
             this.name = name;
+            this.projectNumber = projectCounter;
             increaseProjects(this);
+            incrementCounter();
         }
     }
-
-    // this should create a project and add it to projectArray. is this clean code?
-    // may need to modify this... 
 
     const pageLoad = () => {
         //clear storage
