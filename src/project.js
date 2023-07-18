@@ -1,7 +1,22 @@
 import { pubSub } from "./pubsub";
 
 export function project() {
+
+
     let projectArray = [];
+    console.log(
+    localStorage.projectArray
+
+    )
+    //check if there is local storage
+    //if local storage.projectArray is empty, don't do anything
+    // if (localStorage.projectArray = []) {return}
+    // else {projectArray = localStorage.projectArray};
+
+    
+    // when a change is made, asssign current projectArray to localStorage
+    // localStorage;
+    // let projectArray = [];
 
     let matchingProject = {};
     //getProject and sendTodoToProjectTodoArray occur consecutively
@@ -74,6 +89,10 @@ export function project() {
             this.todoArray = [];
             this.name = name;
             increaseProjects(this);
+            // 
+            localStorage.projectArray.push(this)
+            console.log(localStorage.projectArray)
+            // 
         }
     }
 
