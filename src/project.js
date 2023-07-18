@@ -1,3 +1,4 @@
+import { display } from "./display";
 import { pubSub } from "./pubsub";
 
 export function project() {
@@ -11,7 +12,6 @@ export function project() {
             this.number = projectCounter;
             increaseProjects(this);
             incrementCounter();
-            console.log(this.number);
         }
     }
 
@@ -42,7 +42,6 @@ export function project() {
 
     //add todo to project todoArray
     pubSub.subscribe('sendTodoToProjectTodoArray', (todo) => {
-        console.log(matchingProject);
         addTodoToProjectArray(matchingProject, todo)
         // pubSub to display the todos; send to display.js
         pubSub.publish('displaySelectedProject', matchingProject)
@@ -62,18 +61,20 @@ export function project() {
     })
 
     pubSub.subscribe('getProjectToDelete', (projectIndex) => {
-        const projectToDelete = projectArray.find((project) => {return project.number == projectIndex})
-        projectArray
+        deleteElement(projectArray, projectIndex);
+        pubSub.publish('displaySelectedProject', matchingProject) //needed to set header and todo to particular project
+        pubSub.publish('projectDeleted', projectArray);
     })
+
+    // 
+
 
     pubSub.subscribe('deleteTodo', (todoIndex) => {
         // modifies in place, mutating the original array. this is what we want
         matchingProject.todoArray.forEach((todo) => {
             console.log(todo.number);
         })
-        matchingProject.todoArray.splice(
-            matchingProject.todoArray.findIndex((item) => item.number == todoIndex), 1)
-        // deleteElement(matchingProject.todoArray, todoIndex)
+        deleteElement(matchingProject.todoArray, todoIndex)
         // now display again
         pubSub.publish('displaySelectedProject', matchingProject)
         // pushToLocalStorage();
@@ -93,8 +94,6 @@ export function project() {
 
     const setMatchingProject = (project) => {
         matchingProject = project;
-        console.log(project);
-        console.log(matchingProject);
     }
     const addTodoToProjectArray = (project, todo) => {
         project.todoArray.push(todo)
@@ -104,7 +103,6 @@ export function project() {
         array.splice(
             array.findIndex((item) => item.number = index),1)
     }
-
 
     const increaseProjects = (project) => {
         projectArray.push(project)
