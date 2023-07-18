@@ -18,6 +18,9 @@ export function display() {
     // when creating new project, display all projects
     pubSub.subscribe('projectAdded', displayAllProjectOptions);
 
+    // when deleting a project
+    pubSub.subscribe('projectDeleted', displayAllProjectOptions);
+
     pubSub.subscribe('displaySelectedProject', (project) => {
         changeHeader(project.name);
         displayProjectTodos(project.todoArray); 
@@ -172,7 +175,6 @@ export function display() {
             if (projectSelect[i].textContent == project.name) {
                 projectSelect.value = projectSelect[i].value;
                 projectSelectInTodoForm.value = projectSelect[i].value;
-
             }
         }
     }
@@ -188,8 +190,11 @@ export function display() {
         pubSub.publish("getProjectFromProjectSelect", getSelectedProjectIndex())
     })
 
+
+    // delete project
     const deleteProject = document.querySelector('#deleteProject');
     deleteProject.addEventListener("click", () => {
+        console.log(getSelectedProjectIndex());
         pubSub.publish("getProjectToDelete", getSelectedProjectIndex());
     })
 

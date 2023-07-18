@@ -61,9 +61,11 @@ export function project() {
     })
 
     pubSub.subscribe('getProjectToDelete', (projectIndex) => {
+        projectArray.forEach(item => console.log(item))
         deleteElement(projectArray, projectIndex);
+        projectArray.forEach(item => console.log(item))
+        pubSub.publish('projectDeleted', projectArray); //reset project options
         pubSub.publish('displaySelectedProject', matchingProject) //needed to set header and todo to particular project
-        pubSub.publish('projectDeleted', projectArray);
     })
 
     // 
@@ -101,7 +103,7 @@ export function project() {
 
     const deleteElement = (array, index) => {
         array.splice(
-            array.findIndex((item) => item.number = index),1)
+            array.findIndex((item) => item.number == index),1)
     }
 
     const increaseProjects = (project) => {
