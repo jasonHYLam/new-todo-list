@@ -39,7 +39,7 @@ export function project() {
         // pubSub to display the todos; send to display.js
         pubSub.publish('displaySelectedProject', matchingProject)
         // when making anychange, upload to local storage
-        pushToLocalStorage();
+        // pushToLocalStorage();
     });
 
     // subscribe to when projectform is submitted
@@ -50,7 +50,7 @@ export function project() {
         // when a new project is created
         pubSub.publish('projectAdded', projectArray); //needed to display all project options
         pubSub.publish('displaySelectedProject', matchingProject) //needed to set header and todo to particular project
-        pushToLocalStorage();
+        // pushToLocalStorage();
     })
 
     pubSub.subscribe('deleteTodo', (todoIndex) => {
@@ -62,7 +62,7 @@ export function project() {
             matchingProject.todoArray.findIndex((item) => item.todoNumber == todoIndex), 1)
         // now display again
         pubSub.publish('displaySelectedProject', matchingProject)
-        pushToLocalStorage();
+        // pushToLocalStorage();
     })
 
     // modify todo when the form for it is submitted
@@ -74,7 +74,7 @@ export function project() {
         todoToChange.setProp('priority', newPriority);
 
         pubSub.publish('displaySelectedProject', matchingProject)
-        pushToLocalStorage();
+        // pushToLocalStorage();
     })
 
     const setMatchingProject = (project) => {
@@ -111,6 +111,8 @@ export function project() {
     // may need to modify this... 
 
     const pageLoad = () => {
+        //clear storage
+        localStorage.clear();
         console.log(localStorage.projectArray);
         console.log(localStorage);
         let testProject = new Project('My First Project!');

@@ -74,7 +74,6 @@ export function display() {
 
         todoMainContent.appendChild(todoTop);
         todoMainContent.appendChild(expanded);
-        // todoContainer.appendChild(todoDOM);
 
         return todoMainContent;
     }
@@ -186,12 +185,14 @@ export function display() {
 
     }
 
-    // when clicking on project selects
-    projectSelect.addEventListener("change", ()=> {
-        // send this code to project.js
+    // when clicking on choose project
+    const chooseProject = document.querySelector('#chooseProject');
+    chooseProject.addEventListener("click", () => {
         pubSub.publish("getProjectFromProjectSelect", getSelectedProject())
     })
-    
+
+    const deleteProject = document.querySelector('#deleteProject');
+
 
     const header = document.querySelector("#project-header");
     const changeHeader = (projectName) => {
