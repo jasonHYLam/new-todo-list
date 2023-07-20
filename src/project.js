@@ -4,11 +4,11 @@ import { pubSub } from "./pubsub";
 export function project() {
 
     let projectCounter = 0;
-    if (localStorage.projectCounter == 'undefined') {
-        return
+    if (localStorage.projectCounter == null) {
     } else {
         projectCounter = localStorage.projectCounter;
     }
+    console.log('does this happen');
 
     class Project {
         constructor(name) {
@@ -124,9 +124,10 @@ export function project() {
         localStorage.projectCounter = JSON.stringify(projectCounter);
     }
 
-    const pageLoad = () => {
+    const pageLoad1 = () => {
         //clear storage
         // localStorage.clear();
+        console.log('what s')
         console.log('project local storage');
         console.log(localStorage);
         if (localStorage.projectArray == null) {
@@ -140,8 +141,10 @@ export function project() {
         }
     }
 
+    console.log('does this take place');
     // create new project on first load
-    pageLoad();
+    pageLoad1();
+    console.log('does this ');
 }
 
 

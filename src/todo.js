@@ -53,6 +53,7 @@ function todo() {
         }
     }
     pageLoad();
+    // localStorage.clear();
 }
 
 export {todo};

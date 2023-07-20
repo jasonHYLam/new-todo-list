@@ -118,10 +118,6 @@ body {
     display: none;
 }
 
-/* .description.hidden {
-    display: none;
-} */
-
 .low-priority {
     border-left: rgb(255, 254, 240) solid 15px;
 }
