@@ -116,36 +116,38 @@ export function project() {
         localStorage.matchingProject = JSON.stringify(matchingProject);
     }
 
-    const pageLoad1 = () => {
-        console.log(localStorage);
-        //clear storage
-        // localStorage.clear();
-        if (localStorage.projectArray == null) {
+    const pageLoad = () => {
+        pubSub.publish('consoleLogStorage')
+        const projectStorageLength = 0;
+        pubSub.publish('getLocalStorageLength', projectStorageLength);
+
+        if (projectStorageLength == 0) {
             let testProject = new Project('My First Project!');
             setMatchingProject(testProject);
-            // pubSub.publish('loadInitialOptions', projectArray);
-            // pubSub.publish('loadInitialProject', matchingProject);
         } else {
-            projectArray = JSON.parse(localStorage.projectArray);
-            projectCounter = JSON.parse(localStorage.projectCounter);
-            matchingProject = JSON.parse(localStorage.matchingProject);
-            // pubSub.publish('loadInitialOptions', projectArray);
+            pubSub.publish('getProjectDetails', {projectArray, projectCounter, matchingProject});
         }
             pubSub.publish('loadInitialOptions', projectArray);
             pubSub.publish('loadInitialProject', matchingProject);
+        // pubSub.publish('loadPage');
+        // console.log(localStorage);
+        //clear storage
+        // localStorage.clear();
+        // if (localStorage.projectArray == null) {
+            // let testProject = new Project('My First Project!');
+            // setMatchingProject(testProject);
+        // } else {
+            // projectArray = JSON.parse(localStorage.projectArray);
+            // projectCounter = JSON.parse(localStorage.projectCounter);
+            // matchingProject = JSON.parse(localStorage.matchingProject);
+        // }
+            // pubSub.publish('loadInitialOptions', projectArray);
+            // pubSub.publish('loadInitialProject', matchingProject);
 
     }
     // create new project on first load
-    pageLoad1();
+    pageLoad();
     console.log('matchingproject');
-    console.log(localStorage);
-
-    console.log(localStorage.projectArray);
-    console.log(localStorage.matchingProject);
-    console.log(matchingProject);
-    console.log(projectCounter);
-
-    console.log('does this take place');
 }
 
 

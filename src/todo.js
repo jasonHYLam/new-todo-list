@@ -50,20 +50,24 @@ function todo() {
     }
 
     const pageLoad = () => {
-        if (localStorage.todoCounter == null) {} 
-        else {
-            todoCounter = JSON.parse(localStorage.todoCounter);
-        }
+        const localStorageLength = 0;
+        pubSub.publish('getLocalStorageLength', localStorageLength);
+
+        if (localStorageLength != 0) {pubSub.publish('getTodoCounterFromStorage', todoCounter)};
+        // if (localStorage.todoCounter == null) {} 
+        // else {
+        //     todoCounter = JSON.parse(localStorage.todoCounter);
+        // }
     }
     console.log(localStorage);
     console.log('todo counter before page load');
-    console.log(localStorage.todoCounter);
-    console.log(todoCounter);
+    // console.log(localStorage.todoCounter);
+    // console.log(todoCounter);
     pageLoad();
     // localStorage.clear();
     console.log('todo counter on page load');
-    console.log(localStorage.todoCounter);
-    console.log(todoCounter);
+    // console.log(localStorage.todoCounter);
+    // console.log(todoCounter);
 }
 
 export {todo};
