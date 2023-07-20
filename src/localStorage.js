@@ -1,9 +1,10 @@
 import { project } from "./project";
 import { pubSub } from "./pubsub";
 
-export function localStorage() {
-    pubSub.subscribe('loadPageFromProject', checkIfEmpty);
-    pubSub.subscribe('loadPageFromTodo', checkIfEmpty);
+export function localStorageModule() {
+
+    pubSub.subscribe('getProjectDetailsFromStorage', getProjectDetailsFromStorage);
+    pubSub.subscribe('getTodoCounterFromStorage', getTodoCounterFromStorage);
 
     pubSub.subscribe('storeTodoCounter', storeTodoCounter);
     pubSub.subscribe('storeProjectDetails', storeProjectDetails);
