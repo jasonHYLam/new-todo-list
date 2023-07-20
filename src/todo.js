@@ -32,6 +32,7 @@ function todo() {
 
         // may have to move this elsewhere, but when new todo is created, append it to a project todoArray
         pubSub.publish('sendTodoToProjectTodoArray', this)
+        pushToLocalStorage;
         }
 
         setProp(prop, value) {
@@ -43,7 +44,9 @@ function todo() {
     }
 
     const pageLoad = () => {
-        if (localStorage.todoCounter == 'undefined') {
+        console.log('todo local storage');
+        console.log(localStorage);
+        if (localStorage.todoCounter == null) {
             return;
         } else {
             todoCounter = JSON.parse(localStorage.todoCounter);

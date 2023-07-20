@@ -127,7 +127,9 @@ export function project() {
     const pageLoad = () => {
         //clear storage
         // localStorage.clear();
-        if (localStorage.projectArray == 'undefined') {
+        console.log('project local storage');
+        console.log(localStorage);
+        if (localStorage.projectArray == null) {
             let testProject = new Project('My First Project!');
             setMatchingProject(testProject);
             pubSub.publish('loadInitialOptions', projectArray);
