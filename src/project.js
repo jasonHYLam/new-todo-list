@@ -76,6 +76,7 @@ export function project() {
         } else {
             pubSub.publish('displaySelectedProject', matchingProject) //needed to set header and todo to particular project
         }
+        pushToLocalStorage();
     })
 
     pubSub.subscribe('deleteTodo', (todoIndex) => {
