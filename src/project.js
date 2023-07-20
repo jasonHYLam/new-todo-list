@@ -1,4 +1,5 @@
 import { pubSub } from "./pubsub";
+import * as localStorageModule from "./localStorage";
 
 export function project() {
 
@@ -120,9 +121,12 @@ export function project() {
 
     const pageLoad = () => {
         // pubSub.publish('resetStorage');
-        pubSub.publish('consoleLogStorage')
+        // pubSub.publish('consoleLogStorage')
         let projectStorageLength = 0;
-        pubSub.publish('getLocalStorageLength', projectStorageLength);
+        projectStorageLength = localStorageModule.getLocalStorageLength()
+        
+
+        // pubSub.publish('getLocalStorageLength', projectStorageLength);
 
         if (projectStorageLength == 0) {
             console.log('mer')

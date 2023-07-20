@@ -1,32 +1,31 @@
-import { project } from "./project";
-import { pubSub } from "./pubsub";
 
-export function localStorageModule() {
+// export function localStorageModule() {
 
-    pubSub.subscribe('resetStorage', () => {
-        localStorage.clear();
-    })
-    pubSub.subscribe('getProjectDetailsFromStorage', getProjectDetailsFromStorage);
-    pubSub.subscribe('getTodoCounterFromStorage', getTodoCounterFromStorage);
+    // pubSub.subscribe('resetStorage', () => {
+    //     localStorage.clear();
+    // })
+    // pubSub.subscribe('getProjectDetailsFromStorage', getProjectDetailsFromStorage);
+    // pubSub.subscribe('getTodoCounterFromStorage', getTodoCounterFromStorage);
 
-    pubSub.subscribe('storeTodoCounter', storeTodoCounter);
-    pubSub.subscribe('storeProjectDetails', storeProjectDetails);
+    // pubSub.subscribe('storeTodoCounter', storeTodoCounter);
+    // pubSub.subscribe('storeProjectDetails', storeProjectDetails);
 
-    pubSub.subscribe('getLocalStorageLength', getLocalStorageLength)
+    // pubSub.subscribe('getLocalStorageLength', getLocalStorageLength)
 
-    pubSub.subscribe('consoleLogStorage', getLocalStorage);
+    // // pubSub.subscribe('consoleLogStorage', getLocalStorage);
 
-    function getLocalStorage() {
-        console.log(localStorage);
-        console.log(localStorage.length);
-    }
-    function getLocalStorageLength(temp) {
-        temp = localStorage.length;
+    function getLocalStorageLength() {
+        return localStorage.length
     }
 
-    function getTodoCounterFromStorage(todoCounter) {
+    function checkIfEmpty() {
+        console.log(localStorage.length == 0);
+        return localStorage.length == 0;
+    }
+
+    function getTodoCounterFromStorage() {
         if (!checkIfEmpty()) {
-            todoCounter = JSON.parse(localStorage.todoCounter);
+            return JSON.parse(localStorage.todoCounter);
         }
     }
     function storeTodoCounter(todoCounter) {
@@ -47,4 +46,12 @@ export function localStorageModule() {
         localStorage.projectCounter = JSON.stringify(projectCounter);
         localStorage.matchingProject = JSON.stringify(matchingProject);
     }
+// }
+
+export {
+    getLocalStorageLength,
+    getTodoCounterFromStorage,
+    storeTodoCounter,
+    getProjectDetailsFromStorage,
+    storeProjectDetails,
 }

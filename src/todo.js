@@ -1,5 +1,6 @@
 import { pubSub } from "./pubsub";
 import {format} from 'date-fns';
+import * as localStorageModule from "./localStorage";
 
 //may have to encapsulate all of this into a function
 
@@ -35,7 +36,8 @@ function todo() {
 
         // may have to move this elsewhere, but when new todo is created, append it to a project todoArray
         pubSub.publish('sendTodoToProjectTodoArray', this)
-        pubSub.publish('storeTodoCounter', todoCounter);
+
+        localStorageModule.storeTodoCounter(todoCounter);
         }
 
         setProp(prop, value) {
@@ -45,10 +47,11 @@ function todo() {
 
     const pageLoad = () => {
         let localStorageLength = 0;
-        pubSub.publish('getLocalStorageLength', localStorageLength);
+        localStorageLength = localStorageModule.getLocalStorageLength();
+        console.log(localStorageLength);
 
         if (localStorageLength != 0) {
-            pubSub.publish('getTodoCounterFromStorage', todoCounter)
+            todoCounter = localStorageModule.getTodoCounterFromStorage
         };
     }
     pageLoad();
