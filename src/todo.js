@@ -4,6 +4,9 @@ import {format} from 'date-fns';
 //may have to encapsulate all of this into a function
 
 function todo() {
+    // 
+
+    localStorage.clear();
 
     // pubsub SUBSCRIBE
     pubSub.subscribe('todoFormSubmitted', (args) => {//probably could destructure this tbh
@@ -32,7 +35,7 @@ function todo() {
 
         // may have to move this elsewhere, but when new todo is created, append it to a project todoArray
         pubSub.publish('sendTodoToProjectTodoArray', this)
-        pushToLocalStorage;
+        pushToLocalStorage();
         }
 
         setProp(prop, value) {
@@ -44,8 +47,6 @@ function todo() {
     }
 
     const pageLoad = () => {
-        console.log('todo local storage');
-        console.log(localStorage);
         if (localStorage.todoCounter == null) {
         } else {
             todoCounter = JSON.parse(localStorage.todoCounter);

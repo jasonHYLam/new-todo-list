@@ -2,12 +2,12 @@ import { pubSub } from "./pubsub";
 
 export function project() {
 
+    // localStorage.clear();
     let projectCounter = 0;
-    if (localStorage.projectCounter == null) {
-    } else {
-        projectCounter = localStorage.projectCounter;
-    }
-    console.log('does this happen');
+    // if (localStorage.projectCounter == null) {
+    // } else {
+    //     projectCounter = localStorage.projectCounter;
+    // }
 
     class Project {
         constructor(name) {
@@ -24,11 +24,6 @@ export function project() {
     }
 
     let projectArray = [];
-
-    if (localStorage.projectArray) {
-
-    }
-
     let matchingProject = {};
     //getProject and sendTodoToProjectTodoArray occur consecutively
     // get project from todo form; first get matching project, then wait for todo to be added to the project
@@ -122,29 +117,38 @@ export function project() {
     const pushToLocalStorage = () => {
         localStorage.projectArray = JSON.stringify(projectArray);
         localStorage.projectCounter = JSON.stringify(projectCounter);
+        localStorage.matchingProject = JSON.stringify(matchingProject);
     }
 
     const pageLoad1 = () => {
         //clear storage
         // localStorage.clear();
-        console.log('what s')
-        console.log('project local storage');
-        console.log(localStorage);
         if (localStorage.projectArray == null) {
             let testProject = new Project('My First Project!');
             setMatchingProject(testProject);
-            pubSub.publish('loadInitialOptions', projectArray);
-            pubSub.publish('loadInitialProject', matchingProject);
+            // pubSub.publish('loadInitialOptions', projectArray);
+            // pubSub.publish('loadInitialProject', matchingProject);
         } else {
             projectArray = JSON.parse(localStorage.projectArray);
-            pubSub.publish('loadInitialOptions', projectArray);
+            projectCounter = JSON.parse(localStorage.projectCounter);
+            matchingProject = JSON.parse(localStorage.matchingProject);
+            // pubSub.publish('loadInitialOptions', projectArray);
         }
+            pubSub.publish('loadInitialOptions', projectArray);
+            pubSub.publish('loadInitialProject', matchingProject);
+
     }
+    console.log('matchingproject');
+    console.log(localStorage);
+
+    console.log(localStorage.projectArray);
+    console.log(localStorage.matchingProject);
+    console.log(matchingProject);
+    console.log(projectCounter);
 
     console.log('does this take place');
     // create new project on first load
     pageLoad1();
-    console.log('does this ');
 }
 
 
