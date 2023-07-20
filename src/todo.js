@@ -47,7 +47,6 @@ function todo() {
         console.log('todo local storage');
         console.log(localStorage);
         if (localStorage.todoCounter == null) {
-            return;
         } else {
             todoCounter = JSON.parse(localStorage.todoCounter);
         }

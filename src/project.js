@@ -1,4 +1,3 @@
-import { display } from "./display";
 import { pubSub } from "./pubsub";
 
 export function project() {
