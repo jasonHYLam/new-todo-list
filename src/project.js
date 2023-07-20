@@ -117,6 +117,7 @@ export function project() {
     }
 
     const pageLoad1 = () => {
+        console.log(localStorage);
         //clear storage
         // localStorage.clear();
         if (localStorage.projectArray == null) {
