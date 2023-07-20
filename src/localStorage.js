@@ -3,6 +3,9 @@ import { pubSub } from "./pubsub";
 
 export function localStorageModule() {
 
+    pubSub.subscribe('resetStorage', () => {
+        localStorage.clear();
+    })
     pubSub.subscribe('getProjectDetailsFromStorage', getProjectDetailsFromStorage);
     pubSub.subscribe('getTodoCounterFromStorage', getTodoCounterFromStorage);
 
@@ -15,14 +18,10 @@ export function localStorageModule() {
 
     function getLocalStorage() {
         console.log(localStorage);
+        console.log(localStorage.length);
     }
     function getLocalStorageLength(temp) {
         temp = localStorage.length;
-    }
-
-    function checkIfEmpty() {
-        console.log(localStorage.length == 0);
-        return localStorage.length == 0;
     }
 
     function getTodoCounterFromStorage(todoCounter) {
@@ -44,8 +43,8 @@ export function localStorageModule() {
     }
 
     function storeProjectDetails({projectArray, projectCounter, matchingProject}) {
-        localStorage.projectArray = projectArray;
-        localStorage.projectCounter = projectCounter;
-        localStorage.matchingProject = matchingProject;
+        localStorage.projectArray = JSON.stringify(projectArray);
+        localStorage.projectCounter = JSON.stringify(projectCounter);
+        localStorage.matchingProject = JSON.stringify(matchingProject);
     }
 }

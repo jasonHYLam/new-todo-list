@@ -35,39 +35,23 @@ function todo() {
 
         // may have to move this elsewhere, but when new todo is created, append it to a project todoArray
         pubSub.publish('sendTodoToProjectTodoArray', this)
-        pushToLocalStorage();
-        console.log('todoCounter updated!');
-        console.log(localStorage.todoCounter);
-        console.log(todoCounter);
+        pubSub.publish('storeTodoCounter', todoCounter);
         }
 
         setProp(prop, value) {
             this[prop] = value;
         } 
     }
-    const pushToLocalStorage = () => {
-        localStorage.todoCounter = JSON.stringify(todoCounter);
-    }
 
     const pageLoad = () => {
-        const localStorageLength = 0;
+        let localStorageLength = 0;
         pubSub.publish('getLocalStorageLength', localStorageLength);
 
-        if (localStorageLength != 0) {pubSub.publish('getTodoCounterFromStorage', todoCounter)};
-        // if (localStorage.todoCounter == null) {} 
-        // else {
-        //     todoCounter = JSON.parse(localStorage.todoCounter);
-        // }
+        if (localStorageLength != 0) {
+            pubSub.publish('getTodoCounterFromStorage', todoCounter)
+        };
     }
-    console.log(localStorage);
-    console.log('todo counter before page load');
-    // console.log(localStorage.todoCounter);
-    // console.log(todoCounter);
     pageLoad();
-    // localStorage.clear();
-    console.log('todo counter on page load');
-    // console.log(localStorage.todoCounter);
-    // console.log(todoCounter);
 }
 
 export {todo};
