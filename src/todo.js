@@ -36,6 +36,9 @@ function todo() {
         // may have to move this elsewhere, but when new todo is created, append it to a project todoArray
         pubSub.publish('sendTodoToProjectTodoArray', this)
         pushToLocalStorage();
+        console.log('todoCounter updated!');
+        console.log(localStorage.todoCounter);
+        console.log(todoCounter);
         }
 
         setProp(prop, value) {
@@ -47,13 +50,20 @@ function todo() {
     }
 
     const pageLoad = () => {
-        if (localStorage.todoCounter == null) {
-        } else {
+        if (localStorage.todoCounter == null) {} 
+        else {
             todoCounter = JSON.parse(localStorage.todoCounter);
         }
     }
+    console.log(localStorage);
+    console.log('todo counter before page load');
+    console.log(localStorage.todoCounter);
+    console.log(todoCounter);
     pageLoad();
     // localStorage.clear();
+    console.log('todo counter on page load');
+    console.log(localStorage.todoCounter);
+    console.log(todoCounter);
 }
 
 export {todo};

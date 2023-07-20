@@ -4,10 +4,6 @@ export function project() {
 
     // localStorage.clear();
     let projectCounter = 0;
-    // if (localStorage.projectCounter == null) {
-    // } else {
-    //     projectCounter = localStorage.projectCounter;
-    // }
 
     class Project {
         constructor(name) {
@@ -138,6 +134,8 @@ export function project() {
             pubSub.publish('loadInitialProject', matchingProject);
 
     }
+    // create new project on first load
+    pageLoad1();
     console.log('matchingproject');
     console.log(localStorage);
 
@@ -147,8 +145,6 @@ export function project() {
     console.log(projectCounter);
 
     console.log('does this take place');
-    // create new project on first load
-    pageLoad1();
 }
 
 
