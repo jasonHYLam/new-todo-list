@@ -14,7 +14,12 @@
 
     // // pubSub.subscribe('consoleLogStorage', getLocalStorage);
 
+    function resetStorage() {
+        localStorage.clear();
+    }
+
     function getLocalStorageLength() {
+        console.log(localStorage);
         return localStorage.length
     }
 
@@ -32,13 +37,11 @@
         localStorage.todoCounter = JSON.stringify(todoCounter);
     }
 
-    function getProjectDetailsFromStorage({projectArray, projectCounter, matchingProject}) {
-        if (!checkIfEmpty()) {
-            projectArray = JSON.parse(localStorage.projectArray);
-            projectCounter = JSON.parse(localStorage.projectCounter);
-            matchingProject = JSON.parse(localStorage.matchingProject);
-
-        }
+    function getProjectDetailsFromStorage() {
+            const array = JSON.parse(localStorage.projectArray);
+            const counter = JSON.parse(localStorage.projectCounter);
+            const match = JSON.parse(localStorage.matchingProject);
+            return {array, counter, match,}
     }
 
     function storeProjectDetails({projectArray, projectCounter, matchingProject}) {
@@ -49,6 +52,7 @@
 // }
 
 export {
+    resetStorage,
     getLocalStorageLength,
     getTodoCounterFromStorage,
     storeTodoCounter,

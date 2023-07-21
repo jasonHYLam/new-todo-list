@@ -27,7 +27,8 @@ export function project() {
     pubSub.subscribe('getProjectFromTodoForm',(projectIndex) => {
         const selectedProject = projectArray.find((project) => {return project.number == projectIndex})
         setMatchingProject(selectedProject);
-        pubSub.publish('storeProjectDetails', {projectArray, projectCounter, matchingProject});
+        // pubSub.publish('storeProjectDetails', {projectArray, projectCounter, matchingProject});
+        localStorageModule.storeProjectDetails({projectArray, projectCounter, matchingProject});
     });
 
     //get project from project select; immediately publish to display array
@@ -36,7 +37,8 @@ export function project() {
         setMatchingProject(selectedProject);
         pubSub.publish('displaySelectedProject', matchingProject)
         // pushToLocalStorage();
-        pubSub.publish('storeProjectDetails', {projectArray, projectCounter, matchingProject});
+        // pubSub.publish('storeProjectDetails', {projectArray, projectCounter, matchingProject});
+        localStorageModule.storeProjectDetails({projectArray, projectCounter, matchingProject});
 
     });
 
@@ -47,7 +49,8 @@ export function project() {
         pubSub.publish('displaySelectedProject', matchingProject)
         // when making anychange, upload to local storage
         // pushToLocalStorage();
-        pubSub.publish('storeProjectDetails', {projectArray, projectCounter, matchingProject});
+        // pubSub.publish('storeProjectDetails', {projectArray, projectCounter, matchingProject});
+        localStorageModule.storeProjectDetails({projectArray, projectCounter, matchingProject});
     });
 
     // subscribe to when projectform is submitted
@@ -58,7 +61,8 @@ export function project() {
         // when a new project is created
         pubSub.publish('projectAdded', projectArray); //needed to display all project options
         pubSub.publish('displaySelectedProject', matchingProject) //needed to set header and todo to particular project
-        pubSub.publish('storeProjectDetails', {projectArray, projectCounter, matchingProject});
+        // pubSub.publish('storeProjectDetails', {projectArray, projectCounter, matchingProject});
+        localStorageModule.storeProjectDetails({projectArray, projectCounter, matchingProject});
         // pushToLocalStorage();
     })
 
@@ -74,7 +78,8 @@ export function project() {
         } else {
             pubSub.publish('displaySelectedProject', matchingProject) //needed to set header and todo to particular project
         }
-        pubSub.publish('storeProjectDetails', {projectArray, projectCounter, matchingProject});
+        // pubSub.publish('storeProjectDetails', {projectArray, projectCounter, matchingProject});
+        localStorageModule.storeProjectDetails({projectArray, projectCounter, matchingProject});
         // pushToLocalStorage();
     })
 
@@ -85,7 +90,8 @@ export function project() {
         })
         deleteElement(matchingProject.todoArray, todoIndex)
         // now display again
-        pubSub.publish('displaySelectedProject', matchingProject)
+        // pubSub.publish('displaySelectedProject', matchingProject)
+        localStorageModule.storeProjectDetails({projectArray, projectCounter, matchingProject});
         // pushToLocalStorage();
     })
 
@@ -98,7 +104,8 @@ export function project() {
         todoToChange.setProp('priority', newPriority);
 
         pubSub.publish('displaySelectedProject', matchingProject)
-        pubSub.publish('storeProjectDetails', {projectArray, projectCounter, matchingProject});
+        // pubSub.publish('storeProjectDetails', {projectArray, projectCounter, matchingProject});
+        localStorageModule.storeProjectDetails({projectArray, projectCounter, matchingProject});
         // pushToLocalStorage();
     })
 
@@ -120,13 +127,9 @@ export function project() {
 
 
     const pageLoad = () => {
-        // pubSub.publish('resetStorage');
-        // pubSub.publish('consoleLogStorage')
+        // localStorageModule.resetStorage();
         let projectStorageLength = 0;
         projectStorageLength = localStorageModule.getLocalStorageLength()
-        
-
-        // pubSub.publish('getLocalStorageLength', projectStorageLength);
 
         if (projectStorageLength == 0) {
             console.log('mer')
@@ -134,9 +137,18 @@ export function project() {
             setMatchingProject(testProject);
         } else {
             console.log('gh');
-            pubSub.publish('getProjectDetails', {projectArray, projectCounter, matchingProject});
+            const {array, counter, match} = localStorageModule.getProjectDetailsFromStorage()
+            console.log(array)
+            console.log(counter)
+            console.log(match)
+            projectArray = array;
+            projectCounter = counter;
+            matchingProject = match;
         }
             pubSub.publish('loadInitialOptions', projectArray);
+            console.log('matching project');
+            console.log(matchingProject);
+            //TODO; fix matching project
             pubSub.publish('loadInitialProject', matchingProject);
     }
     // create new project on first load

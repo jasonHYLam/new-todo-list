@@ -10,3 +10,4 @@
 - Use of closest() method to target specific parent node, useful when clicking a node that has children nodes.
 - Use of clearfix in CSS to expand parent when child is appended.
 - Use of separate module for using Local Storage, as local storage is inherently not shared between multiple modules.
+- Returning an object with multiple functions requires that the same name of variables are used.
