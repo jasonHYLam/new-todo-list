@@ -41,9 +41,10 @@ export function project() {
 
     //add todo to project todoArray
     pubSub.subscribe('sendTodoToProjectTodoArray', (todo) => {
-        addTodoToProjectArray(matchingProject, todo)
         console.log(matchingProject)
         console.log(todo)
+        addTodoToProjectArray(matchingProject, todo)
+        console.log(matchingProject)
         // pubSub to display the todos; send to display.js
         pubSub.publish('displaySelectedProject', matchingProject)
         // when making anychange, upload to local storage
@@ -119,12 +120,9 @@ export function project() {
     const pageLoad = () => {
         
         // localStorageModule.resetStorage();
-        // let projectStorageLength = localStorageModule.getLocalStorageLength();
-
         if (localStorageModule.isProjectEmpty()) {
             let testProject = new Project('My First Project!');
             setMatchingProject(testProject);
-
             localStorageModule.storeProjectDetails({projectArray, projectCounter, matchingProject});
         } else {
             const {array, counter, match} = localStorageModule.getProjectDetailsFromStorage()
@@ -135,7 +133,6 @@ export function project() {
             localStorageModule.storeProjectDetails({projectArray, projectCounter, matchingProject});
         }
             pubSub.publish('loadInitialOptions', projectArray);
-            //TODO; fix matching project
             pubSub.publish('loadInitialProject', matchingProject);
     }
     // create new project on first load

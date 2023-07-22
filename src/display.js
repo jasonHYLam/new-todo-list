@@ -151,6 +151,8 @@ export function display() {
         const option = document.createElement('option');
         option.textContent = project.name;
         option.value = project.number;
+        // option.value = project.name;
+        // option.setAttribute('data-index', project.number)
         return option;
     }
 
@@ -178,8 +180,12 @@ export function display() {
         const projectSelectInTodoForm = document.querySelector("#projectForTodo");
         for (let i = 0; i < projectSelect.length; i++) {
             if (projectSelect[i].textContent == project.name) {
+                console.log(projectSelect[i]);
+                //TODO: fix so that when new todo is created, the project select for the form remains on the current project.
+                //may need to create another value... or just change the value to be name, and introduce new data attribute for counter
                 projectSelect.value = projectSelect[i].value;
                 projectSelectInTodoForm.value = projectSelect[i].value;
+                console.log(projectSelectInTodoForm.value);
             }
         }
     }

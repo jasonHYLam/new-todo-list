@@ -40,15 +40,10 @@ function todo() {
         pubSub.publish('sendTodoToProjectTodoArray', this)
         localStorageModule.storeTodoCounter(todoCounter);
         }
-
-        // setProp(prop, value) {
-        //     this[prop] = value;
-        // } 
     }
 
     const pageLoad = () => {
         // localStorageModule.resetStorage();
-        // console.log(localStorageModule.getLocalStorage());
         if (localStorageModule.isTodoEmpty()) {
             localStorageModule.storeTodoCounter(todoCounter);
         } else {
