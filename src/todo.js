@@ -26,6 +26,10 @@ function todo() {
 
 
     class Todo {
+        setProp(prop, value) {
+            this[prop] = value;
+        } 
+
         constructor(title, description, dueDate, priority) {
         this.title = title;
         this.description = description;
@@ -33,16 +37,13 @@ function todo() {
         this.priority = priority;
         this.number = todoCounter;
         incrementCounter();
-
-        // may have to move this elsewhere, but when new todo is created, append it to a project todoArray
         pubSub.publish('sendTodoToProjectTodoArray', this)
-
         localStorageModule.storeTodoCounter(todoCounter);
         }
 
-        setProp(prop, value) {
-            this[prop] = value;
-        } 
+        // setProp(prop, value) {
+        //     this[prop] = value;
+        // } 
     }
 
     const pageLoad = () => {
