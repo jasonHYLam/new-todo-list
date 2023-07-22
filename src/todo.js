@@ -46,12 +46,15 @@ function todo() {
     }
 
     const pageLoad = () => {
-        let localStorageLength = 0;
-        localStorageLength = localStorageModule.getLocalStorageLength();
+        // let localStorageLength = 0;
+        // localStorageLength = localStorageModule.getLocalStorageLength(); //could use OR operator
+        let localStorageLength = localStorageModule.getLocalStorageLength(); //could use OR operator
         console.log(localStorageLength);
 
         if (localStorageLength != 0) {
-            todoCounter = localStorageModule.getTodoCounterFromStorage
+            console.log(localStorageModule.getTodoCounterFromStorage());
+            todoCounter = localStorageModule.getTodoCounterFromStorage();
+            localStorageModule.storeTodoCounter(todoCounter);
         };
     }
     pageLoad();

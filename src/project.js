@@ -128,15 +128,17 @@ export function project() {
 
     const pageLoad = () => {
         // localStorageModule.resetStorage();
-        let projectStorageLength = 0;
-        projectStorageLength = localStorageModule.getLocalStorageLength()
+        // let projectStorageLength = 0;
+        // projectStorageLength = localStorageModule.getLocalStorageLength()
+        let projectStorageLength = localStorageModule.getLocalStorageLength();
 
         if (projectStorageLength == 0) {
-            console.log('mer')
+            console.log('empty')
             let testProject = new Project('My First Project!');
             setMatchingProject(testProject);
+            localStorageModule.storeProjectDetails({projectArray, projectCounter, matchingProject});
         } else {
-            console.log('gh');
+            console.log('not empty');
             const {array, counter, match} = localStorageModule.getProjectDetailsFromStorage()
             console.log(array)
             console.log(counter)
@@ -144,6 +146,7 @@ export function project() {
             projectArray = array;
             projectCounter = counter;
             matchingProject = match;
+            localStorageModule.storeProjectDetails({projectArray, projectCounter, matchingProject});
         }
             pubSub.publish('loadInitialOptions', projectArray);
             console.log('matching project');
