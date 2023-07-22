@@ -1,5 +1,5 @@
 import { pubSub } from "./pubsub";
-import * as localStorageModule from "./localStorage";
+import localStorageModule from "./localStorage";
 
 export function project() {
 
@@ -127,18 +127,22 @@ export function project() {
 
 
     const pageLoad = () => {
+        
         // localStorageModule.resetStorage();
         // let projectStorageLength = 0;
         // projectStorageLength = localStorageModule.getLocalStorageLength()
+
         let projectStorageLength = localStorageModule.getLocalStorageLength();
 
         if (projectStorageLength == 0) {
             console.log('empty')
             let testProject = new Project('My First Project!');
             setMatchingProject(testProject);
+
             localStorageModule.storeProjectDetails({projectArray, projectCounter, matchingProject});
         } else {
             console.log('not empty');
+            console.log(localStorage);
             const {array, counter, match} = localStorageModule.getProjectDetailsFromStorage()
             console.log(array)
             console.log(counter)

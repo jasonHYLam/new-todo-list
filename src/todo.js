@@ -1,14 +1,14 @@
 import { pubSub } from "./pubsub";
 import {format} from 'date-fns';
-import * as localStorageModule from "./localStorage";
+import localStorageModule from "./localStorage";
 
 //may have to encapsulate all of this into a function
 
 function todo() {
     // 
 
-    localStorage.clear();
 
+    // localStorage.clear();
     // pubsub SUBSCRIBE
     pubSub.subscribe('todoFormSubmitted', (args) => {//probably could destructure this tbh
         const newTodo = new Todo(args[0], args[1], args[2], args[3])
@@ -47,10 +47,16 @@ function todo() {
 
     const pageLoad = () => {
         // let localStorageLength = 0;
+        // localStorageModule.resetStorage();
+        console.log(localStorage);
+        console.log(localStorageModule);
         // localStorageLength = localStorageModule.getLocalStorageLength(); //could use OR operator
         let localStorageLength = localStorageModule.getLocalStorageLength(); //could use OR operator
         console.log(localStorageLength);
-
+        // if (localStorageLength == 0) {
+        if (!localStorageModule.getLocalStorageTodoCounter()) {
+            localStorageModule.storeTodoCounter(todoCounter);
+        }
         if (localStorageLength != 0) {
             console.log(localStorageModule.getTodoCounterFromStorage());
             todoCounter = localStorageModule.getTodoCounterFromStorage();
