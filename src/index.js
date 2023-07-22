@@ -7,6 +7,7 @@ import './style.css';
 
 // localStorageModule();
 display();
-project();
+// project();
 todo();
+project();
 formHandler();

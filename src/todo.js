@@ -46,22 +46,14 @@ function todo() {
     }
 
     const pageLoad = () => {
-        // let localStorageLength = 0;
         // localStorageModule.resetStorage();
-        console.log(localStorage);
-        console.log(localStorageModule);
-        // localStorageLength = localStorageModule.getLocalStorageLength(); //could use OR operator
-        let localStorageLength = localStorageModule.getLocalStorageLength(); //could use OR operator
-        console.log(localStorageLength);
-        // if (localStorageLength == 0) {
-        if (!localStorageModule.getLocalStorageTodoCounter()) {
+        // console.log(localStorageModule.getLocalStorage());
+        if (localStorageModule.isTodoEmpty()) {
             localStorageModule.storeTodoCounter(todoCounter);
-        }
-        if (localStorageLength != 0) {
-            console.log(localStorageModule.getTodoCounterFromStorage());
+        } else {
             todoCounter = localStorageModule.getTodoCounterFromStorage();
             localStorageModule.storeTodoCounter(todoCounter);
-        };
+        }
     }
     pageLoad();
 }

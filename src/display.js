@@ -51,7 +51,7 @@ export function display() {
         const todoDOM = document.createElement('div');
         setPriorityClass(todo,todoDOM);
         todoDOM.classList.add('todoDOM');
-        todoDOM.setAttribute('data-index', todo.todoNumber);
+        todoDOM.setAttribute('data-index', todo.number);
 
         todoDOM.appendChild(createMainTodoContent(todo));
         todoDOM.appendChild(createFormInTodo());
